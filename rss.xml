@@ -1,0 +1,1219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+<channel>
+ <title>Tweets</title>
+ <item>
+  <title>448496913919516672</title>
+  <description>play{a=SinOsc;mean({|i|b=a.ar(a.ar(j=i+0.99)/9,a.ar(a.ar(j/99))*9,j*9).tanh;Pan2.ar(a.ar(b.exprange(j*99,j+1*99)+i),b)}!9)}// #SuperCollider</description>
+  <guid>448496913919516672</guid>
+  <pubDate>2014-03-25 16:29:31</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>448183491340304385</title>
+  <description>play{a=SinOsc;Normalizer.ar(Splay.ar(a.ar(811+b=(2..8),a.ar((c=a.ar(0.1/b,b))&lt;0*9*b+855+(9/b),a.ar(899/b)*2,2).tanh*6,c)))}// #SuperCollider</description>
+  <guid>448183491340304385</guid>
+  <pubDate>2014-03-24 19:44:05</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>447299072861700096</title>
+  <description>play{a=LFNoise2;b=LFPar;c=(1..8).choose;Splay.arFill(8,{Saw.ar([55,110].choose+a.kr(1/8),b.kr(1/8).fold(b.kr(c/2),b.kr(c)*2))})}//#sc140</description>
+  <guid>447299072861700096</guid>
+  <pubDate>2014-03-22 09:09:44</pubDate>
+  <author>AdamArmfield</author>
+ </item>
+ <item>
+  <title>447738059497676800</title>
+  <description>play{a=SinOsc;tanh(a.ar(3e-3,DelayC.ar(Ringz.ar(b=InFeedback.ar(1),[9,12],a.ar(c=1/[3,4])+15),1,a.ar(0,b.lag3(1))/9+0.5)))}// #SuperCollider</description>
+  <guid>447738059497676800</guid>
+  <pubDate>2014-03-23 14:14:06</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>447503180671483904</title>
+  <description>( { SendPeakRMS.kr(In.ar(0, 2), 5, 3, "/replyAddress") }.play(RootNode(Server.default), nil, \addToTail); ) #WhyYouNoWork #SuperCollider</description>
+  <guid>447503180671483904</guid>
+  <pubDate>2014-03-22 22:40:47</pubDate>
+  <author>celesteh</author>
+ </item>
+ <item>
+  <title>447312148109492224</title>
+  <description>play{a=SinOsc;b=(2,4..20);CombN.ar(Splay.ar(HPF.ar(a.ar(0,Duty.ar(2/b,0,Dseq(b,inf)).lag2(a.ar(1/b,b)%1)*2pi),9)),1,2/3,4)}// #SuperCollider</description>
+  <guid>447312148109492224</guid>
+  <pubDate>2014-03-22 10:01:41</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>447132914141384704</title>
+  <description>play{a=LFSaw;Splay.ar(BLowPass4.ar(b=a.ar(a.ar(c=3/(1..12),d=c/3*2,99/c+99,900+c)),c*999+a.ar(c),a.ar(c,d)%1+0.01*2)).tanh}// #SuperCollider</description>
+  <guid>447132914141384704</guid>
+  <pubDate>2014-03-21 22:09:28</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>446912027068358657</title>
+  <description>play{LPF.ar(Saw.ar(110.07)+Saw.ar(110.13),SinOsc.ar(15).range(220,10000)).dup*0.1}; #supercollider</description>
+  <guid>446912027068358657</guid>
+  <pubDate>2014-03-21 07:31:45</pubDate>
+  <author>tonetron</author>
+ </item>
+ <item>
+  <title>446787452653805568</title>
+  <description>play{a=Pulse;c=a.ar(b=[4,1,5,8,3],d=b/9).lag(1/b);Splay.ar(a.ar(b*99*a.ar(b,1/4,1,1.01)|a.ar(d,d,98,99).lag(c%1),c/2+0.5))}// #SuperCollider</description>
+  <guid>446787452653805568</guid>
+  <pubDate>2014-03-20 23:16:44</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>446237894437769216</title>
+  <description>play{a=LFSaw;Splay.ar(CombN.ar(Blip.ar(a.ar(b=(1..5)).ceil*(a.ar(1/b)*30+60)+99,a.ar(0.2/b).round(1/3)*8+9).tanh,4,4/b,9))}// #SuperCollider</description>
+  <guid>446237894437769216</guid>
+  <pubDate>2014-03-19 10:52:59</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>23004475094466561</title>
+  <description>f={|x|x.collect{|x|x*x}.sum.sqrt}.flop;{a={rrand(4,18)}!8;z=a++f.(a.powerset).flat;Splay.ar(Ringz.ar(Impulse.ar(4/z),z*440,0.1))}.play;//#SC</description>
+  <guid>23004475094466561</guid>
+  <pubDate>2011-01-06 13:14:28</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>22999131148517376</title>
+  <description>Ndef(\x, { a=3; b=2; z = [a,b,(a*a) + (b*b) ** 0.5]; Splay.ar(Ringz.ar(Impulse.ar(4/z), z*440*(Ndef.ar(\x)+1), 0.2)) }).play; //well… #SC</description>
+  <guid>22999131148517376</guid>
+  <pubDate>2011-01-06 12:53:14</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>7453310466</title>
+  <description>play { Ringz.ar(TDuty.ar(Dseq(20 / "I'm sitting in a ringz".ascii, inf)).lag(0.001), 0, 1).clip / 2 } #supercollider</description>
+  <guid>7453310466</guid>
+  <pubDate>2010-01-06 20:53:12</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>6287765433</title>
+  <description>@muellmusik play { Splay.ar("Zum Wohl!".ascii.collect{|c, i|Ringz.ar(Impulse.ar(1, 1/5 * i), c * 4, 2, 0.1)}.scramble) }//#supercollider</description>
+  <guid>6287765433</guid>
+  <pubDate>2009-12-03 01:03:14</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>6287671123</title>
+  <description>play {Splay.ar({SinOsc.ar(Select.kr(SinOsc.kr(0.1)*4, {Duty.ar(1/14, 0, Dseq({ 1.0.rand}!4,inf)) }!16)*500+800)} ! 4)*0.1} //#supercollider</description>
+  <guid>6287671123</guid>
+  <pubDate>2009-12-03 01:00:09</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>6286952982</title>
+  <description>@rukano a=Dseq("tnnerbinu".reverse.postln.ascii,inf)*_; play { Splay.ar(Impulse.ar(1.03 ** Duty.ar(a!8, 0, a.(1)))) }; #supercollider #sc</description>
+  <guid>6286952982</guid>
+  <pubDate>2009-12-03 00:35:06</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>5394913447</title>
+  <description>Pdef(\x, Ppar(Pbind(\freq, Pbrown(2000, 8000, 1), \dur, 0.05, \pan, Pbrown(-1,1,0.2))!4)).play; // #sc #supercollider</description>
+  <guid>5394913447</guid>
+  <pubDate>2009-11-03 16:17:08</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>5369442913</title>
+  <description>play{RecordBuf.ar(SinOsc.ar(LFNoise0.kr(1!8)*550+600),b=LocalBuf(1e5,8));Splay.ar(BufRd.ar(8,b,LFNoise1.ar(1!4).max(0)*1e5))*0.1}// #sc</description>
+  <guid>5369442913</guid>
+  <pubDate>2009-11-02 18:30:59</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>5347949638</title>
+  <description>f = Duty.kr(_, 0, Dseq("hi scott".ascii, inf)); play { RLPF.ar(Saw.ar(f.(1/8)), f.(1/7)*8, 0.1)  } #sc #supercollider</description>
+  <guid>5347949638</guid>
+  <pubDate>2009-11-01 22:34:29</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>5347164429</title>
+  <description>f=_.rand;g=EnvGen.kr(Env(f!10,f!9/9).circle).linexp(0,10,_,_); play{Splay.ar({RHPF.ar(Saw.ar(g.(10,5e3))*g.(0.1,1),g.(1e3,1e4))}!8)}; // #sc</description>
+  <guid>5347164429</guid>
+  <pubDate>2009-11-01 21:56:39</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>5213642946</title>
+  <description>play{Splay.ar(Ringz.ar(Impulse.ar((0..60)*2+8.5), (20..80).midicps, 0.01) * LFNoise2.kr(0.1 ! 60).max(0))}// #supercollider</description>
+  <guid>5213642946</guid>
+  <pubDate>2009-10-27 22:52:54</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>5213489513</title>
+  <description>play{Splay.ar(Impulse.ar((20..80).midicps) * LFNoise2.kr(0.1 ! 60).max(0))}// #supercollider</description>
+  <guid>5213489513</guid>
+  <pubDate>2009-10-27 22:47:00</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>5146247448</title>
+  <description>play{Splay.ar({Klank.ar(`[{exprand(90pi,1e3)}!3,1,0.3.rand],TDuty.ar(Dshuf(0.6!(59.rand+8)++5.rand,inf))) }!16)*0.2}// #supercollider</description>
+  <guid>5146247448</guid>
+  <pubDate>2009-10-25 13:00:07</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>5146202235</title>
+  <description>play { Splay.ar({ Klank.ar(`[{exprand(90pi,1e3)}!3, 1, 0.3.rand], TDuty.ar(Dshuf(0.6!(59.rand+8)++5.rand,inf))) }!16) * 0.2 }//#sc</description>
+  <guid>5146202235</guid>
+  <pubDate>2009-10-25 12:56:43</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>5146034545</title>
+  <description>a={exprand(90pi,15e4)}!9;{({b=0.3.rand;Klank.ar(`[a.scramble[0..3],b,b],TDuty.ar(Dshuf(2!(59.rand+8)++b/7,inf)))}!16).sum*0.2}.play;//#sc</description>
+  <guid>5146034545</guid>
+  <pubDate>2009-10-25 12:44:06</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>5133928849</title>
+  <description>a={exprand(90pi,15e4)}!9; b=1.0.rand; {({Klank.ar(`[a.scramble[0..3],b,b],TDuty.ar(Dshuf(2!(59.rand+8)++b/7,inf)))}!16).sum*0.2}.play; //#sc</description>
+  <guid>5133928849</guid>
+  <pubDate>2009-10-24 23:19:33</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>5120122702</title>
+  <description>{({t = TDuty.kr(Dseq(1!(16.rand+8)++(1/16!6.rand),inf));Decay.kr(t, 0.4.rand)*SinOsc.ar(600.0.rand+300)}!16).sum*0.2}.play; //#supercollider</description>
+  <guid>5120122702</guid>
+  <pubDate>2009-10-24 10:20:31</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>5108693325</title>
+  <description>{ Splay.ar(SinOsc.ar({ Spring.ar(LFNoise0.ar(1.0.rand + 1), 0.9.rand, 0.009.rand).exprange(210, 4300) } ! 14)) *0.1 }.play; //#supercollider</description>
+  <guid>5108693325</guid>
+  <pubDate>2009-10-23 22:30:16</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>5107654704</title>
+  <description>Ndef(\,{ TDuty.ar(Ndef.ar(\_,2),0,0.5) }).play; Ndef(\_,{ Demand.ar(Ndef.ar(\).reverse,0, Dseq({ 0.3.rand } ! 14, inf)) });//#supercollider</description>
+  <guid>5107654704</guid>
+  <pubDate>2009-10-23 21:42:16</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>5106351502</title>
+  <description>Ndef(\,{ Impulse.ar(Ndef.ar(\_,2)) }).play; Ndef(\_,{ 200 - PulseCount.ar(Ndef.ar(\).reverse, Dust.ar(0.5!2)) });//#supercollider</description>
+  <guid>5106351502</guid>
+  <pubDate>2009-10-23 20:42:35</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>3296092649</title>
+  <description>f={|x,n|if(n&gt;0,{ f.(SelectX.ar(LFTri.kr(1/n.rand)*n,{SinOsc.ar(30 exprand:2e4)*x}!n),n-1)},x/2)}; play{Splay.ar(f.(1,6))/8}// #supercollider</description>
+  <guid>3296092649</guid>
+  <pubDate>2009-08-13 23:12:58</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>3284276119</title>
+  <description>play { Limiter.ar(Ringz.ar(Impulse.ar(10, LFNoise0.kr(2!2)), 0)) * 0.1 }// #supercollider</description>
+  <guid>3284276119</guid>
+  <pubDate>2009-08-13 10:57:59</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>3275043281</title>
+  <description>a = {|x,n| if(n&gt;0) { a.(SinOsc.ar(MouseX.kr(3, 5)**(n-1)*x, x*[1,-1]), n - 1) } {x} }; play { a.(40, rrand(3, 10)) * 0.1}// #supercollider</description>
+  <guid>3275043281</guid>
+  <pubDate>2009-08-12 23:02:55</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>3274274397</title>
+  <description>a=SinOsc.ar(_,1,_);b=exprand(_,_);play{ a.(a.({a.(a.(b.(1e-2,1e1),b.(1e-2,1e1)),b.(1e1,1e3))}!2,b.(5e1,4e3)),1e-1) };// #supercollider</description>
+  <guid>3274274397</guid>
+  <pubDate>2009-08-12 22:19:29</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>3274272579</title>
+  <description>a=SinOsc.ar(_,1,_);b=exprand(_,_);play{ a.({a.(a.(a.(b.(1e-2,1e1),b.(1e-2,1e1)),b.(1e1,1e3)),b.(5e1,4e3))}!2,1e-1) };// #supercollider</description>
+  <guid>3274272579</guid>
+  <pubDate>2009-08-12 22:19:23</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>3274270738</title>
+  <description>a=SinOsc.ar(_,1,_);b=exprand(_,_);play{ a.(a.(a.(a.(b.(1e-2,1e1),b.(1e-2,1e1)),b.(1e1,1e3)),{b.(5e1,4e3)}!2),1e-1) };// #supercollider</description>
+  <guid>3274270738</guid>
+  <pubDate>2009-08-12 22:19:17</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>3274268341</title>
+  <description>a=SinOsc.ar(_,1,_);b=exprand(_,_);play{ a.(a.(a.(a.({b.(1e-2,1e1)}!2,b.(1e-2,1e1)),b.(1e1,1e3)),b.(5e1,4e3)),1e-1) };// #supercollider</description>
+  <guid>3274268341</guid>
+  <pubDate>2009-08-12 22:19:08</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>3273917650</title>
+  <description>f=Impulse.ar(_);play{t=[20,0,10].rand;a=EnvGen.kr(Env([1,1,35,20],t)); b=1.05**a/80;Ringz.ar(f.(a)*Trig.ar(f.(0),t.sum),2000+1000.rand,b)/4}</description>
+  <guid>3273917650</guid>
+  <pubDate>2009-08-12 21:59:33</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>3273870181</title>
+  <description>play{g=LFSaw.kr(_);f=g.(g.([0.1,0.11]).range(0.1,10));z=LFPulse.kr(10,0,f).product;Splay.ar(z.lag+1*z*SinOsc.ar(11400,f))/5}//#supercollider</description>
+  <guid>3273870181</guid>
+  <pubDate>2009-08-12 21:56:57</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>3273734999</title>
+  <description>play{f=LFSaw.kr(LFSaw.kr([1,1.1]*0.1).range(0.01, 10));z=LFPulse.kr(10,0,f).product; Splay.ar(z.lag+1*z*SinOsc.ar((8..17)*40,f))/5} // #sc</description>
+  <guid>3273734999</guid>
+  <pubDate>2009-08-12 21:49:15</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>1577505054</title>
+  <description>Ndef(\x, { ring1(SinOsc.ar(234*XLine.kr(0.1,1,5)+LFNoise2.kr(2!2, 5)),DelayC.ar(Ndef(\x).ar.reverse,0.03,0.02+(Ndef(\x).ar*0.001)))}).play;</description>
+  <guid>1577505054</guid>
+  <pubDate>2009-04-21 19:01:54</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>1460652798</title>
+  <description>Ndef(\x, { var r = SinOsc.ar(Ndef(\x).ar, [0, pi]); Splay.ar(max(sin(r[0] * ({ exprand(1.0, 3000.0)}!8) + LFNoise1.kr(1!8)),0))*0.4 }).play;</description>
+  <guid>1460652798</guid>
+  <pubDate>2009-04-06 03:00:55</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>1431837288</title>
+  <description>@mathk {Pulse.ar(Select.kr(LFSaw.kr(10).range(0,3), [1,1.25,1.5] * 440)) * LFPulse.kr(0.2, 0, 0.25) }.play; // #supercollider 040 -&gt; 030</description>
+  <guid>1431837288</guid>
+  <pubDate>2009-04-01 15:05:27</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>1431811189</title>
+  <description>var f={rrand(1, 2.1)}; {Splay.ar(SinOsc.ar(SinOsc.ar(0.02 * (f!8)).sum.round(f!8) * (f!8+1) + 1 * 100)) * 0.1}.play;//stairs #supercollider</description>
+  <guid>1431811189</guid>
+  <pubDate>2009-04-01 15:00:46</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>1431668265</title>
+  <description>var f={rrand(0.2, 2.0)}; {Splay.ar(SinOsc.ar(SinOsc.ar(0.02 * (f!8)).sum.round(f!8) * (f!8+1) * 100)) * 0.1}.play;//stairs #supercollider</description>
+  <guid>1431668265</guid>
+  <pubDate>2009-04-01 14:37:08</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>1426152600</title>
+  <description>{(SinOsc.ar(LFNoise1.kr(0.01).exprange(100,{exprand(300,10000)}!120)).mean)!2}.play;//chdegaulle</description>
+  <guid>1426152600</guid>
+  <pubDate>2009-03-31 18:46:38</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>1426151944</title>
+  <description>{SinOsc.ar(XLine.kr(0.001,1,120).range(100,{exprand(300,10000)}!120)).mean}.play;//chdegaulle</description>
+  <guid>1426151944</guid>
+  <pubDate>2009-03-31 18:46:31</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>1425975079</title>
+  <description>/*eclecticity*/ Ndef(\x, { SinOsc.ar(BrownNoise.ar(30!2, 200), Ndef(\x).ar * LFNoise1.kr(1!2,1,1)) }).play;</description>
+  <guid>1425975079</guid>
+  <pubDate>2009-03-31 18:16:14</pubDate>
+  <author>telephon</author>
+ </item>
+ <item>
+  <title>438748899319508992</title>
+  <description>* {display: none} #dangerousCSS</description>
+  <guid>438748899319508992</guid>
+  <pubDate>2014-02-26 18:54:23</pubDate>
+  <author>michai</author>
+ </item>
+ <item>
+  <title>150958259895939073</title>
+  <description>@jaclong Hi, it's supercollider code. You install SuperCollider, and run the code. This one plays the sequence from "On the Run"(pink floyd)</description>
+  <guid>150958259895939073</guid>
+  <pubDate>2011-12-25 15:17:08</pubDate>
+  <author>earslap</author>
+ </item>
+ <item>
+  <title>150827201087012864</title>
+  <description>play{k={|a,b|a*pow(b,LFNoise1.ar(0.2)+1/2)};RLPF.ar(Pulse.ar(Duty.kr(1/11,0,Dseq([-3,0,2,0,7,5,7,9]+35,inf)).midicps),k.(300,10),k.(0.1,5))}</description>
+  <guid>150827201087012864</guid>
+  <pubDate>2011-12-25 06:36:21</pubDate>
+  <author>earslap</author>
+ </item>
+ <item>
+  <title>437094206767513600</title>
+  <description>{play{x=Impulse.ar(0.05);20.do{x=LPF.ar(AllpassL.ar(LeakDC.ar(x),4,8**kr(n=LFNoise2,0s)/2,8)*1.2,8**n.kr({0s.rand}!2)*2500,1).tanh};x*5}}!4</description>
+  <guid>437094206767513600</guid>
+  <pubDate>2014-02-22 05:19:14</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>408145586970324992</title>
+  <description>play{mean({|j|i=j+1;CombC.ar(x=0.5**i*Pluck.ar(a=Saw.ar(1/i+1/6),a,1,1/i/(3-LFPulse.ar(1/i))/30,9,1b/i),1,SinOsc ar:i+[4,9]*1e-3,0)-x}!9)/9}</description>
+  <guid>408145586970324992</guid>
+  <pubDate>2013-12-04 08:07:45</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>401279659167346688</title>
+  <description>play{mean({|i|99**(-1-LFSaw.kr(i+1/180,1))*SinOsc.ar(i+1*55)}!48)!2} // adapted from http://t.co/E6FJNSZJlo #supercollider</description>
+  <guid>401279659167346688</guid>
+  <pubDate>2013-11-15 09:25:00</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>387489141274857472</title>
+  <description>play{x=Saw.ar(0.7**lag(kr(n=LFNoise0,1/5),2)*[601,500,749]);Splay.ar({|i|x=x+BAllPass.ar(x,9**n.kr(a=1b**i)*2e3)+CombL.ar(x,1,a,8)/2s}!9@8)}</description>
+  <guid>387489141274857472</guid>
+  <pubDate>2013-10-08 08:06:25</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>289761321065541633</title>
+  <description>play{Splay.ar(x=sin(CombL.ar(LPF.ar(InFeedback.ar(20,99),2e3),1,LFNoise1.kr(1e-3!99)+1/99,0.05)+Dust2.ar(0.01!99)))++(0!18)++(x-x.rotate/2)}</description>
+  <guid>289761321065541633</guid>
+  <pubDate>2013-01-11 15:50:57</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>288145579475861504</title>
+  <description>x=(1..8);y=scramble(8/x);z=y/.x y;d={|d,a|Duty.ar(d,0,Dseq(a,inf))};play{d.(d.(0.16,z*.x z)/4e3,z)/5-d.(d.(0.04,x*2)/8e2,[0,1])/3!2}//#sc140</description>
+  <guid>288145579475861504</guid>
+  <pubDate>2013-01-07 04:50:34</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>280559787840786432</title>
+  <description>play{Splay.ar(a={|i|RLPF.ar(Trig.ar(InFeedback.ar(i+[-1,1]%6+2).sum.abs.lag(1e-3)&lt;1e-4,8e-3),{2**10.rand*20}!4,1e-3,0s).mean.sin}!6,0.5)++a}</description>
+  <guid>280559787840786432</guid>
+  <pubDate>2012-12-17 06:27:20</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>279156626248826880</title>
+  <description>play{CombL.ar(InFeedback ar:0,1,1/4,9).sin+Pluck.ar(ar(n=LFNoise1,400),a=LFNoise0.kr(1/2),1,1/a.abs/200,99)*SinOsc.ar(n.kr(1/8)*[6,6s])*0.8}</description>
+  <guid>279156626248826880</guid>
+  <pubDate>2012-12-13 09:31:40</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>273708223440244736</title>
+  <description>play{ar(r=RLPF,Saw.ar([200,302]).mean,5**(n={LFNoise1.kr(1/8)})*1e3,0.6)+r.ar(Saw ar:Amplitude.kr(3**n*3e3*InFeedback.ar(0)+1,4,4),1e3)/5!2}</description>
+  <guid>273708223440244736</guid>
+  <pubDate>2012-11-28 08:41:40</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>254951275941199873</title>
+  <description>play{f=({|i|DelayC.ar(0-LPF.ar(InFeedback.ar(2+i),2000).tanh,1,1.5**i/4e3)}!6);Splay.ar(f)++(Dust.ar(f*2e4+1)*LFSaw.kr(3/4**(0..5)/8)/5+f)}</description>
+  <guid>254951275941199873</guid>
+  <pubDate>2012-10-07 14:28:15</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>254630884521680896</title>
+  <description>play{f=({|i|DelayC.ar(0-LPF.ar(1-SinOsc.ar(1/2**i)*0.53*InFeedback.ar(2+i),1e3).sin,1,0.9**i/3e2)}!9);Splay.ar(f)++(http://t.co/nopkpYRd)}</description>
+  <guid>254630884521680896</guid>
+  <pubDate>2012-10-06 17:15:08</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>248839626230472704</title>
+  <description>play{x=mean({|i|LPF.ar(DelayC.ar(LeakDC.ar(InFeedback ar:2,1-y=1e-4),2,40**LFNoise2.ar(0.8**i)/20),1e4.rand)}!40);[x,x,x+Trig1.ar(y+x,2*y)]}</description>
+  <guid>248839626230472704</guid>
+  <pubDate>2012-09-20 17:42:44</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>248427531374571520</title>
+  <description>play{(x=AllpassN.ar(mean(DelayL.ar(LeakDC.ar(InFeedback ar:2),1,1+((a=LFNoise2.ar(0.1))*[1,-1])/50)),1,[1,1.01],20))/5++(x+SinOsc.ar(24,x))}</description>
+  <guid>248427531374571520</guid>
+  <pubDate>2012-09-19 14:25:13</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>242738407485341697</title>
+  <description>play{CombN.ar(x=mean(DelayL.ar(LeakDC.ar(InFeedback.ar(2)),1,1+(LFNoise0.kr(1/6)*[1,-1])/50)),1,1,[30,-30])/8++(CuspN.ar(800)+x)}</description>
+  <guid>242738407485341697</guid>
+  <pubDate>2012-09-03 21:38:40</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>241901987128545281</title>
+  <description>play{CombN.ar(x=LPF.ar(mean(DelayL.ar(LeakDC.ar(InFeedback.ar(2)),1,1+(LFNoise0.kr(4)*[1,-1])/180)),1e3),1,1/2,[8,4])*9++(x+Impulse.ar(4))}</description>
+  <guid>241901987128545281</guid>
+  <pubDate>2012-09-01 14:15:02</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>240890674923315200</title>
+  <description>play{DelayN.ar(x=RLPF.ar(Saw ar:Duty.kr(1/4,0,Dseq(2**([0,3,5,7]+.x flat([5,5,0,3]!8)/12)*90,inf)),0.1**LFSaw.kr(4,1)*200),1,1/8)*1.4+x/2!2}</description>
+  <guid>240890674923315200</guid>
+  <pubDate>2012-08-29 19:16:27</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>239307098121465856</title>
+  <description>play{b=LFTri.kr(1/6);CombN.ar(a=sum({BPF.ar(b&lt;0+(b&gt;0.3)*PinkNoise.ar(1!2)*b,b&gt;0.29+0.2*exprand(30,1e4),0.3**2.0.rand/8)}!30),1,1/40,-0.02)}</description>
+  <guid>239307098121465856</guid>
+  <pubDate>2012-08-25 10:23:52</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>238917066038595584</title>
+  <description>play{RLPF.ar(Saw.ar(Duty.kr([1/8,1],0,Dseq(2**flop([[0,0,2,3],-99!4++[24,22,20,19]]/12)*99,inf))),0.2**[LFSaw.kr(8,1),LFTri.kr(1,1)]*300)}</description>
+  <guid>238917066038595584</guid>
+  <pubDate>2012-08-24 08:34:02</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>236423137443581952</title>
+  <description>play{Splay.ar({BPF.ar(LFNoise1.kr(1/16)&gt;0.5*9*Saw.ar(4**6.0.rand)*LFPulse.ar(2**11.rand/32,8.rand/8,0.5.rand),2**9.0.rand*20,0.5.rand)}!99)}</description>
+  <guid>236423137443581952</guid>
+  <pubDate>2012-08-17 11:24:03</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>235761574218956800</title>
+  <description>play{Splay.ar({BPF.ar(PinkNoise.ar(20)*LFPulse.ar(2**rrand(-2,2),rand(4)/4,0.5.rand)*(LFNoise1.kr(1/4)&gt;0),exprand(50,15000),1.0.rand)}!10)}</description>
+  <guid>235761574218956800</guid>
+  <pubDate>2012-08-15 15:35:14</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>200287104587149313</title>
+  <description>f=FreqShift;play{f.ar(Saw.ar(40),-500)*Line.kr(1,0)+f.ar(DelayN.ar(InFeedback.ar*5,0.13,0.13),40)+f.ar(Saw.ar,Line.kr(3e3,0,3,1,0,2))/5!2}</description>
+  <guid>200287104587149313</guid>
+  <pubDate>2012-05-09 18:12:21</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>199863939591438338</title>
+  <description>Ndef(\,{CombN.ar(BPF.ar(Saw.ar(1/8)*1e5+CuspN.ar*1e-3-Ndef(\).ar/40,200,4),1,LFNoise0.ar(1/8).lag+2/[2.02,3]/99++4,9).sum.tanh!2}).play</description>
+  <guid>199863939591438338</guid>
+  <pubDate>2012-05-08 14:10:51</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>199082822198235138</title>
+  <description>Pbind(\dur,1/6,\note,Pseq(stutter(x=[0,7,12,7,-2,5,10,5,-7,0,5,7,8,7,5];x=x++7++x++3!4;y=0!8++[5,3,2,0,3,2,0,-2]+5!4;flat(x++y)-8),4)).play</description>
+  <guid>199082822198235138</guid>
+  <pubDate>2012-05-06 10:26:58</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>198860475289698305</title>
+  <description>play{l=LFSaw;SinOsc.ar(15**(l.kr(-4.8,1)*l.kr(-1.8,1))*20).sqrt+(99**l.kr(-0.6,0.5)/99*CuspL.ar)+Blip.ar(0.8,1+LFNoise0.kr(0.2)*3e3,4)!2/4}</description>
+  <guid>198860475289698305</guid>
+  <pubDate>2012-05-05 19:43:26</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>155654725281398784</title>
+  <description>play{s=SinOsc;f=Duty.kr(0.8,0,Dseq([5,5,9,8]*9,inf));RLPF.ar(Pulse ar:f,4**s.ar(4**LFNoise1.kr(1.2)*4)*4*f)+s.ar(9**LFSaw.kr(-2.5,1)*9)/4!2}</description>
+  <guid>155654725281398784</guid>
+  <pubDate>2012-01-07 14:19:13</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>133273824329351168</title>
+  <description>p={|x,a,f|9.do{x=BAllPass.ar(x*a,f).tanh};x};play{i=Dust.ar(2);p.(Dust.ar(EnvGen.ar(Env.perc,i,1e3,0,1).poll),1.4,50)/9+p.(i,1.8,40)!2}</description>
+  <guid>133273824329351168</guid>
+  <pubDate>2011-11-06 20:05:30</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>133270549232222211</title>
+  <description>fork{{play{LPF.ar(PinkNoise.ar,100)*Pulse.ar(XLine.kr(2000,1500,2))*EnvGen.kr(Env.triangle(2),1,1,0,1,2)!2};2.0.rand.wait}!20} // screamers</description>
+  <guid>133270549232222211</guid>
+  <pubDate>2011-11-06 19:52:29</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>133187837511204864</title>
+  <description>p={|x,a,f|9.do{x=BAllPass.ar(x*a,f).tanh};x};play{p.(Dust.ar(XLine.kr(1e4,0.01,5)*XLine.kr(0.001,1,0.8)),1.2,50)/2+p.(Impulse.ar(0),2,40)!2}</description>
+  <guid>133187837511204864</guid>
+  <pubDate>2011-11-06 14:23:49</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>126003167208017921</title>
+  <description>play{x = PinkNoise.ar(0.1!2);x+FreqShift.ar(x, [0.15,0.1501])} // homesick for good old Brighton-by-the-sea #supercollider</description>
+  <guid>126003167208017921</guid>
+  <pubDate>2011-10-17 18:34:30</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>76996438508322817</title>
+  <description>f=0;{inf.do{|i|f=f+log2(2*i%6+1+floor(f)/(i%5+1))%2;play{SyncSaw.ar(2**f*99+[0,1],i%8+2*52)*Line.kr(0.1,0,1,1,0,2)};0.3.wait}}.r.play</description>
+  <guid>76996438508322817</guid>
+  <pubDate>2011-06-04 12:59:16</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>26091604635</title>
+  <description>play{GVerb.ar(VarSaw.ar(Duty.ar(1/5,0,Dseq(x=[[4,4.5],[2,3,5,6]];flat(x*.x allTuples(x*.x x)*4).clump(2)++0)),0,0.9)*LFPulse.ar(5),99,5)/5}</description>
+  <guid>26091604635</guid>
+  <pubDate>2010-10-01 15:45:04</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>25242536461</title>
+  <description>t={|u,d,a|u.ar(Duty.ar(d/5,0,Dseq(a++0))*300)};play{t.(Saw,1,x=[6,5,9,8];flat(y=allTuples(x/.t x)[(127..0)+[0,127]]%1))+t.(LFTri,4,y*2)!2/6}</description>
+  <guid>25242536461</guid>
+  <pubDate>2010-09-22 20:23:41</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>25141507102</title>
+  <description>play{GVerb.ar(Saw.ar(Duty.ar(1/5,0,Dseq(x=[6,5,9,8];allTuples(x/.t x)[(127..0)+[0,127]].flat%1*300++0))),65,5)/3} // #supercollider</description>
+  <guid>25141507102</guid>
+  <pubDate>2010-09-21 18:30:00</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>25036896906</title>
+  <description>play{GVerb.ar(Pulse.ar(Duty.ar(1/8,0,Dseq(x=[5,2,7,3];1/flat(allTuples(x/.t x).reject(any(_,{|i|i%1==0}))%1)*.x[1,3,2,6]*40++0))),165,7)/5}</description>
+  <guid>25036896906</guid>
+  <pubDate>2010-09-20 15:55:48</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>25020347452</title>
+  <description>play{GVerb.ar(Saw.ar(Duty.ar(1/8,0,Dseq(x=[5,2,[9,7],3];1/(flat(allTuples(x/.t x).reject(any(_,{|i|i%1==0}))/.-1 x)%1)*30,inf))),165,5)/5}</description>
+  <guid>25020347452</guid>
+  <pubDate>2010-09-20 12:25:04</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>25019999163</title>
+  <description>play{GVerb.ar(Saw.ar(Duty.ar(1/8,0,Dseq(x=[5,2,9,3];1/(flat(allTuples(x/.t x).reject(any(_,{|i|i%1==0}))/.-1 x)%1)*30,inf))),165,5)/5}</description>
+  <guid>25019999163</guid>
+  <pubDate>2010-09-20 12:19:45</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>24970091071</title>
+  <description>play{GVerb.ar(LFTri.ar(Duty.ar(Dseq([3,1]/12,inf),0,Dseq(x=(3..6);allTuples(x/.t x).flat*[100,200,400],inf))),25,5)/5} // #supercollider</description>
+  <guid>24970091071</guid>
+  <pubDate>2010-09-19 22:00:28</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>24613440802</title>
+  <description>x=Ndef(\x,Pbind(\freq,Pseq(a=(3..5);a*.x a*.x[4,8],8)));Ndef(\,{Limiter ar:GVerb.ar(PitchShift.ar(Ndef ar:\,1,2,0,0.1),20,20)/4+x.ar}).play</description>
+  <guid>24613440802</guid>
+  <pubDate>2010-09-15 23:33:15</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>24612329332</title>
+  <description>x=Ndef(\x,Pbind(\freq,Pseq(a=(3..5);a/.x a*.x[40,80],8)));Ndef(\,{Limiter ar:GVerb.ar(PitchShift.ar(Ndef ar:\,1,2,0,0.1),30,9)/4+x.ar}).play</description>
+  <guid>24612329332</guid>
+  <pubDate>2010-09-15 23:17:32</pubDate>
+  <author>headcube</author>
+ </item>
+ <item>
+  <title>1664336054</title>
+  <description>(
+play{Out.ar([0,1],LPF.ar(Saw.ar(SinOsc.kr(XLine.kr(9,5000,9),0,20,99),0.7,0),500)*EnvGen.kr(Env.new([0,1,0],[7,1])));})
+) #supercollider</description>
+  <guid>1664336054</guid>
+  <pubDate>2009-05-01 00:06:09</pubDate>
+  <author>superdorch</author>
+ </item>
+ <item>
+  <title>9272626685</title>
+  <description>play{a=LFNoise1;SinOsc.ar(round(VarSaw.ar(a.kr(10,0.1),0,1)*a.kr(1!2!2,400),a.kr(1/50,32,76))).tanh}// new : lawrencecrow.com #supercollider</description>
+  <guid>9272626685</guid>
+  <pubDate>2010-02-18 06:29:44</pubDate>
+  <author>micromoog</author>
+ </item>
+ <item>
+  <title>2881915970</title>
+  <description>{BPF.ar(DynKlang.ar(`[[3,5,[4,6]]],Demand.kr(Impulse.kr(1/3),0,Dseq([9,8,6,4],inf))*7).floor,LFPar.ar(1,2,911,999))/3}.play;//#supercollider</description>
+  <guid>2881915970</guid>
+  <pubDate>2009-07-28 01:49:01</pubDate>
+  <author>micromoog</author>
+ </item>
+ <item>
+  <title>2832944814</title>
+  <description>play{VarSaw.ar((Hasher.ar(Latch.ar(SinOsc.ar((1..4)!2),Impulse.ar([5/2,5])))*300+300).round(60),0,LFNoise2.ar(2,1/3,1/2))/5}//#supercollider</description>
+  <guid>2832944814</guid>
+  <pubDate>2009-07-25 05:07:46</pubDate>
+  <author>micromoog</author>
+ </item>
+ <item>
+  <title>2830121379</title>
+  <description>play{a=VarSaw.ar(SinOsc.ar(1/20,7/3,80,80),0,LFNoise1.kr(1,1/2,1/2))*Line.ar(0,1)!2;CombN.ar(a,2,2,20,1,a).softclip}//#supercollider rumble</description>
+  <guid>2830121379</guid>
+  <pubDate>2009-07-25 01:45:22</pubDate>
+  <author>micromoog</author>
+ </item>
+ <item>
+  <title>2749504555</title>
+  <description>4.do({{PanB2.ar(Gendy1.ar(1,1,1,1,rrand(150,250),500,0.1)*LFNoise1.kr(1,0.25,0.75),LFNoise1.kr(1))}.play})//#supercollider BEES BEES BEES</description>
+  <guid>2749504555</guid>
+  <pubDate>2009-07-21 01:26:36</pubDate>
+  <author>micromoog</author>
+ </item>
+ <item>
+  <title>1703379403</title>
+  <description>play{BPF.ar(VarSaw.ar(LFNoise1.kr(3,40,200),0,0.25)+PinkNoise.ar(0.1),LFNoise2.kr(12,700,1000),0.3)!2};//#supercollider say what?</description>
+  <guid>1703379403</guid>
+  <pubDate>2009-05-05 04:49:45</pubDate>
+  <author>micromoog</author>
+ </item>
+ <item>
+  <title>1675053702</title>
+  <description>play{LFCub.ar(LFSaw.kr(LFPulse.kr(1/4,1/4,1/4)*2+2,1,-20,50))+(WhiteNoise.ar(LFPulse.kr(4,0,LFPulse.kr(1,3/4)/4+0.05))/8)!2}//#supercollider</description>
+  <guid>1675053702</guid>
+  <pubDate>2009-05-02 01:41:04</pubDate>
+  <author>micromoog</author>
+ </item>
+ <item>
+  <title>423394187799973888</title>
+  <description>play{x=Decay2.ar(Impulse.ar([4,3]))*Blip.ar(50,4)+LocalIn.ar(2);LocalOut.ar(DelayC.ar(x,2,TChoose.kr(Impulse.kr(1/4),[3,4,6]/8).lag));x} #sc</description>
+  <guid>423394187799973888</guid>
+  <pubDate>2014-01-15 10:00:15</pubDate>
+  <author>rukano</author>
+ </item>
+ <item>
+  <title>423390531868430336</title>
+  <description>play{x=LFNoise1.kr(1/4,7,8);GVerb.ar(Decay2.ar(Impulse.ar([x,x+1]),x/2e3,x/50)*Blip.ar(x*3+50,x*2),2,60)} // #sctweets #supercollider #sc140</description>
+  <guid>423390531868430336</guid>
+  <pubDate>2014-01-15 09:45:43</pubDate>
+  <author>rukano</author>
+ </item>
+ <item>
+  <title>420678784992301056</title>
+  <description>@sctweeters {CombC.ar(Decay2.ar(Impulse.ar(1))*SinOsc.ar(800)*0.1,4,LFNoise2.ar(LFNoise1.kr(0.1).range(0.1,2)).range(0.01,3),10)!2}.play</description>
+  <guid>420678784992301056</guid>
+  <pubDate>2014-01-07 22:10:12</pubDate>
+  <author>__DKH__</author>
+ </item>
+ <item>
+  <title>390379057268789248</title>
+  <description>(play{GVerb.ar([Impulse.ar([8,3]),Dust.ar([3,8])],roomsize:LFNoise2.kr(1/4)*28+[1.5,2])};)//#sc140 #supercollider</description>
+  <guid>390379057268789248</guid>
+  <pubDate>2013-10-16 07:29:54</pubDate>
+  <author>minkepatt</author>
+ </item>
+ <item>
+  <title>380717839348293633</title>
+  <description>... like this: (play{v=PulseCount.ar(Impulse.ar(8e3));HPF.ar((((v*6)&amp;(v&lt;&lt;[14,13]))|((v*3)%(v&gt;&gt;[17,18])))%[51,53]%8,5).tanh;}) // #LOUD !!!</description>
+  <guid>380717839348293633</guid>
+  <pubDate>2013-09-19 15:39:40</pubDate>
+  <author>minkepatt</author>
+ </item>
+ <item>
+  <title>366177655835463680</title>
+  <description>(a={|z=#[0,1]|var i=LFTri.ar([4,3]*77)*Decay2.kr(Impulse.kr([5,3]/6),2,1);i+BufDelayL.ar(z/9,i*8,7*Saw.ar(8/7))}.play;)//#Supercollider</description>
+  <guid>366177655835463680</guid>
+  <pubDate>2013-08-10 12:42:11</pubDate>
+  <author>minkepatt</author>
+ </item>
+ <item>
+  <title>310697292703346688</title>
+  <description>@reaktorplayer hélas, some examples are outdated (sturm3 etc.), but common music, taube's soft, is great!</description>
+  <guid>310697292703346688</guid>
+  <pubDate>2013-03-10 10:23:01</pubDate>
+  <author>minkepatt</author>
+ </item>
+ <item>
+  <title>445939927822635009</title>
+  <description>play{a=LFTri.ar(b=8/(1..11))%(LFTri.ar(b-3))+2.01;Limiter.ar(Splay.ar(Formant.ar(202*a[0..3],404*a[4..7],606*a[8..11])))/2}// #SuperCollider</description>
+  <guid>445939927822635009</guid>
+  <pubDate>2014-03-18 15:08:58</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>445923641667358720</title>
+  <description>play{Splay.ar(Limiter.ar(Formlet.ar((a=LFSaw).ar((b=(1..8))+200),b*a.ar(b/29).round(0.51)+1*99,a.ar(b/9)*0.5+0.50001)/99))}// #SuperCollider</description>
+  <guid>445923641667358720</guid>
+  <pubDate>2014-03-18 14:04:15</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>436427170542809088</title>
+  <description>Ndef(\,{|g,f|LPF.ar(Saw.ar([g,f]),1999)}).play;{|i|Ndef(\)[i+1]=\set-&gt;Pbind(\lag,i/9.1,\g,a=Pseq((i..9)*91,inf),\f,a-i)}!19// #SuperCollider</description>
+  <guid>436427170542809088</guid>
+  <pubDate>2014-02-20 09:08:40</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>436143527584473088</title>
+  <description>Ndef(\,{|g,f|Pulse.ar([g,f])}).play;{|i|Ndef(\)[i=i+1]=\set-&gt;Pbind(\lag,i,\g,Pseq((i..9)*99,inf),\f,Pseq((i..91)*9,inf))}!9// #SuperCollider</description>
+  <guid>436143527584473088</guid>
+  <pubDate>2014-02-19 14:21:34</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>427912821964156928</title>
+  <description>play{a=LFTri;b=(1..11).rotate(4)*1.011;LeakDC.ar(Splay.ar(Sweep.ar(0,b+999).fold(a.ar(11.11/b)/2-0.5,a.ar(11.1/b)/2+0.5)))}// #SuperCollider</description>
+  <guid>427912821964156928</guid>
+  <pubDate>2014-01-27 21:15:41</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>419910189215526912</title>
+  <description>play{a=LFSaw;c=(1..32);Splay.ar(SinOsc.ar(0,BPF.ar(a.ar(pi/c)*8pi*a.ar(c*a.ar(2/c,1/c,8.16,16)),c*99,a.ar(3/c)/3+0.34))/2)}// #SuperCollider</description>
+  <guid>419910189215526912</guid>
+  <pubDate>2014-01-05 19:16:05</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>417669068913537025</title>
+  <description>play{a=SinOsc;f={|i|Vibrato.ar(*if(i&gt;0,{[a.ar(1/i)+2*f.(i-1)]},{[(99..96),(1..4),a.ar(0.1)+1,9]}))};Splay.ar(a.ar(f.(10)))}// #SuperCollider</description>
+  <guid>417669068913537025</guid>
+  <pubDate>2013-12-30 14:50:40</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>417451048672849921</title>
+  <description>play{c=SinOsc;mean({|i|Splay.ar({|j|CombC.ar(c.ar(j+1*99),1,c.ar(a=i*2+j/12)/2+0.5)*c.ar(i+j*99+99)*c.ar(a/3)}!8)}!8).tanh}// #SuperCollider</description>
+  <guid>417451048672849921</guid>
+  <pubDate>2013-12-30 00:24:20</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>417311008210694144</title>
+  <description>play{c=LFTri;mean({|i|Splay.ar([a=Saw.ar(i/98+99),DelayC.ar(a,2,c.ar(i/97+c.ar(i+1/(c.ar(i/96)*2e3+2e3),i/9,9))+1),a])}!9)}// #SuperCollider</description>
+  <guid>417311008210694144</guid>
+  <pubDate>2013-12-29 15:07:52</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>414117703163457536</title>
+  <description>play{Splay.ar(Formant.ar(RLPF.ar(Blip.ar(b=[4,0.5,8,16],LFSaw.ar(1/b,0,c=99,c),c,64),c,SinOsc.ar(b,b,0.5,0.6)).midicps,c))}// #SuperCollider</description>
+  <guid>414117703163457536</guid>
+  <pubDate>2013-12-20 19:38:49</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>411540562974502913</title>
+  <description>play{a=SinOsc;GVerb.ar(a.ar(1+round(a.ar(0.01),c=[1,2]/3)*99*round(a.ar(c/2)+2))*a.ar(a.ar(c))*a.ar(c/4,0,a.ar(1/c)),99)/4}// #SuperCollider</description>
+  <guid>411540562974502913</guid>
+  <pubDate>2013-12-13 16:58:10</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>411534350853734401</title>
+  <description>play{a=LFTri;b=(1..5);Splay.ar(a.ar(b*99+round(a.ar(2/b)*40,40),b,a.ar(a.ar(0.5/b),b,a.ar(1/b,b,a.ar(2**b,b,pi)))).asin)/2}// #SuperCollider</description>
+  <guid>411534350853734401</guid>
+  <pubDate>2013-12-13 16:33:29</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>410958133008162816</title>
+  <description>play{a=LFTri;b=(1..8)+0.505;Splay.ar(a.ar(a.ar(1/(101-b))+1*99|a.ar(a.ar(1/b,1/b,pi,a.ar(1/b)+9)/b,1/b,404,404))*3).tanh/2}// #SuperCollider</description>
+  <guid>410958133008162816</guid>
+  <pubDate>2013-12-12 02:23:48</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>408270475974815745</title>
+  <description>{|i|SynthDef(i,{|f|Out.ar(i,Saw.ar(f)*EnvGate())},0.123456).add;Pmono(i,\dur,c=Pn(Pshuf(i*4+4/8.fib,8))/20,\f,15/c).play}!2// #SuperCollider</description>
+  <guid>408270475974815745</guid>
+  <pubDate>2013-12-04 16:24:01</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>408219410336194560</title>
+  <description>SynthDef(\,{|f|Out.ar(0,LFPar.ar(f)*EnvGate()!2)}).add;PmonoArtic(\,\legato,c=Pn(Pshuf(6/8.fib,8)),\dur,c/22,\f,400/c).play// #SuperCollider</description>
+  <guid>408219410336194560</guid>
+  <pubDate>2013-12-04 13:01:06</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>408021531319476224</title>
+  <description>a=LFPar;play{Out.ar(5,a.ar(1)|a.ar(5)+RLPF.ar(x=Pan2.ar(InFeedback.ar(5),SinOsc.ar(5.5)),3e3,a.ar(1/25)/2+1.7));x*a.ar(99)}// #SuperCollider</description>
+  <guid>408021531319476224</guid>
+  <pubDate>2013-12-03 23:54:48</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>407912860832911361</title>
+  <description>a=LFTri;Ndef(\a,{CombC.ar(Ndef(\).ar,1,a.ar(2)/8+0.2,6)+9&amp;(a.ar(1/3)*6+5)});Ndef(\,{LPF.ar(a.ar(Ndef(\a).ar*99),3e3)}).play// #SuperCollider</description>
+  <guid>407912860832911361</guid>
+  <pubDate>2013-12-03 16:42:59</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>407902302037487616</title>
+  <description>a=LFTri;Ndef(\a,{CombC.ar(Ndef(\).ar,1,a.ar([2,3])/8+0.2,8)+8&amp;(a.ar(1/[3,2])*7)});Ndef(\,{a.ar(Ndef(\a).ar*[99,199])}).play// #SuperCollider</description>
+  <guid>407902302037487616</guid>
+  <pubDate>2013-12-03 16:01:01</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>405715507963101185</title>
+  <description>play{a=LFCub;b=(1..8);sum(CombN.ar(SinOsc.ar(c=2/b,a.ar(ceil(a.ar(c)*a.ar(1/b,0,75)).round(75),0,a.ar(0.1/c)*9)),1,1/5))/9}// #SuperCollider</description>
+  <guid>405715507963101185</guid>
+  <pubDate>2013-11-27 15:11:29</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>405695533945065472</title>
+  <description>play{b=(1..4);Splay.ar(CombN.ar(SinOsc.ar(1/b,Spring.ar(LFPulse.ar(pi/b),99*b,1.3e-3)*LFTri.ar(0.13/b,0,pi,2pi)),1,1/4,2))}// #SuperCollider</description>
+  <guid>405695533945065472</guid>
+  <pubDate>2013-11-27 13:52:07</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>405428776005140480</title>
+  <description>play{a=SinOsc;c=a.ar(0,a.ar(b=[2,3])*400,a.ar(b/4.1));c+a.ar(b*99*Amplitude.ar(c,0,1/7))+GrayNoise.ar(CombN.ar(c,1,b/3))/2}// #SuperCollider</description>
+  <guid>405428776005140480</guid>
+  <pubDate>2013-11-26 20:12:07</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>405416713170063360</title>
+  <description>play{GVerb.ar(Splay.ar(SinOsc.ar(0,Blip.ar(a=(1..5),99)*99,Blip.ar(a+2.5,a).lag2(LFSaw.ar(1/(a+2.25),2/a)+1)))/3,99,6,0.7)}// #SuperCollider</description>
+  <guid>405416713170063360</guid>
+  <pubDate>2013-11-26 19:24:11</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>405363449850384384</title>
+  <description>30.do{|i|play{b=13.fib;Resonz.ar(Splay.ar(Blip.ar(i+1/b,19)*ClipNoise.ar),i*[50,60]+400,LFTri.ar(1/[20,30]*i,i/9)/9+0.13)}}// #SuperCollider</description>
+  <guid>405363449850384384</guid>
+  <pubDate>2013-11-26 15:52:32</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>405027970214940672</title>
+  <description>play{a=LFTri;Splay.ar(Pulse.ar(b=(101,202..1010)/2,RHPF.ar(a.ar(99/b)*0.9%1,a.ar(9/b,b).linexp(0,1,4,1e4),a.ar(5/b)+1.5)))}// #SuperCollider</description>
+  <guid>405027970214940672</guid>
+  <pubDate>2013-11-25 17:39:27</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>405010271082516480</title>
+  <description>play{a=LFTri;BufWr.ar(a.ar(b=[303,404]),l=LocalBuf(64,2).clear,a.ar(b*a.ar(99/b)));BufRd.ar(2,l,a.ar(b+2)*a.ar(0.01)*12)/4}// #SuperCollider</description>
+  <guid>405010271082516480</guid>
+  <pubDate>2013-11-25 16:29:08</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>403867698204917760</title>
+  <description>play{CombC.ar(BLowPass.ar(Limiter.ar(LeakDC.ar(InFeedback.ar([1,0]))),2e3)+Impulse.ar(0),1,LFTri.ar(1/[6,8])*0.4+0.5)*0.99}// #SuperCollider</description>
+  <guid>403867698204917760</guid>
+  <pubDate>2013-11-22 12:48:57</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>402839691709251584</title>
+  <description>play{a=SinOsc;LeakDC.ar(a.ar([1,2],a.ar(Pitch.kr(CombN.ar(InFeedback.ar([1,0]),5,[4.8,4.7])).flop[0]-4)*2pi*a.ar(1/16)))/2}// #SuperCollider</description>
+  <guid>402839691709251584</guid>
+  <pubDate>2013-11-19 16:44:01</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>402798788609191937</title>
+  <description>play{a=LFPulse;a.ar(Pitch.kr(CombN.ar(InFeedback.ar([1,0]),4,4,8)).flop[0]*a.ar([6,3],0,a.ar(1.99)/8+0.3,1.2),0,a.ar(1)/2)}// #SuperCollider</description>
+  <guid>402798788609191937</guid>
+  <pubDate>2013-11-19 14:01:29</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>402777676005388289</title>
+  <description>play{a=SinOscFB;a.ar(Pitch.kr(CombN.kr(InFeedback.ar([1,0]),1,1/[2,3])).flop[0]*a.ar(1/[3,4],0.1,0.3,1.2),a.ar(1/[4,5])/2)}// #SuperCollider</description>
+  <guid>402777676005388289</guid>
+  <pubDate>2013-11-19 12:37:35</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>402766558289608704</title>
+  <description>play{c=CombN.ar(InFeedback.ar(0,2),1,1/8,2.4,1.4);LeakDC.ar(SinOscFB.ar(Pitch.kr(c).flop[0]-0.2+(d=c.abs.lag(0.032)),1-d))}// #SuperCollider</description>
+  <guid>402766558289608704</guid>
+  <pubDate>2013-11-19 11:53:25</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>401734189067677696</title>
+  <description>play{a=SinOscFB;c=a.ar([50,99],0.4);RecordBuf.ar(InFeedback.ar(0,2)+c/3,b=LocalBuf(8e4,2).clear);BufRd.ar(2,b,a.ar(c)*6e4)}// #SuperCollider</description>
+  <guid>401734189067677696</guid>
+  <pubDate>2013-11-16 15:31:09</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>401724993265885185</title>
+  <description>play{a=LFTri;BufWr.ar(a.ar([2.995,4]*99),b=LocalBuf(3e4,2).clear,a.ar([2,6]/99)*3e4);BufRd.ar(2,b,a.ar([6,9.06]/99)*9e3)/5}// #SuperCollider</description>
+  <guid>401724993265885185</guid>
+  <pubDate>2013-11-16 14:54:36</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>374524024761487360</title>
+  <description>{|i|Pmono(\default,\dur,Pseq(1/[i=i+0.999,Pn(Pseq(b=(2..8)*i),Pseq(b))],inf),\amp,1/b,\freq,Pseq([b,b*i/4]*99,inf)).play}!8// #SuperCollider</description>
+  <guid>374524024761487360</guid>
+  <pubDate>2013-09-02 13:27:40</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>372400658973863936</title>
+  <description>a=SinOscFB;play{LeakDC.ar(Splay.ar(RHPF.ar(PinkNoise.ar(a.ar(b=1/(1..32),b)),a.ar(a.ar(b,b),1.35)+1/b*50,0.009,b))).tanh/2}// #SuperCollider</description>
+  <guid>372400658973863936</guid>
+  <pubDate>2013-08-27 16:50:10</pubDate>
+  <author>redFrik</author>
+ </item>
+ <item>
+  <title>7552845982</title>
+  <description>{play{Ringz.ar(Crackle.ar.tanh,2000.exprand(20),{0.6.rand}!2)/800*Decay.ar(TDuty.ar(Dseq([Dshuf((0,1..5)/6,3)],inf)))}}!11#supercollider</description>
+  <guid>7552845982</guid>
+  <pubDate>2010-01-09 09:46:55</pubDate>
+  <author>luuma</author>
+ </item>
+ <item>
+  <title>276013497081532417</title>
+  <description>play{a=Pulse;(40..61).midicps.clump(2).collect{|x,y|RHPF.ar(a.ar(x+Decay.ar(Impulse.ar(7/(y+3)),1/(y+2),x*4))/12,y*100+40,0.02)}.sum.tanh}</description>
+  <guid>276013497081532417</guid>
+  <pubDate>2012-12-04 17:22:00</pubDate>
+  <author>j_liljedahl</author>
+ </item>
+ <item>
+  <title>339506544364363777</title>
+  <description>play{GVerb.ar({|i|RLPF.ar(Saw.ar(1e3/(i+3),Decay.ar(Impulse.ar(1/(i+1),0.5),1)),500*i+1e3,0.4)}.dup(10).sum*0.2,77)} #supercollider</description>
+  <guid>339506544364363777</guid>
+  <pubDate>2013-05-28 22:20:42</pubDate>
+  <author>j_liljedahl</author>
+ </item>
+ <item>
+  <title>400396824898330624</title>
+  <description>play{d=Duty.kr(Dwhite(0,LFNoise2.ar([1,1]).abs,inf),0,Dwhite(0,230,inf));GVerb.ar(BPF.ar(PinkNoise.ar(39),d.midicps,0.005).softclip,2,0.05)}</description>
+  <guid>400396824898330624</guid>
+  <pubDate>2013-11-12 22:56:56</pubDate>
+  <author>glitchlich</author>
+ </item>
+ <item>
+  <title>400396318369001472</title>
+  <description>play{b=GVerb.ar(Blip.ar(Duty.ar(1,0,Dseq([9,0,4,7,[12,5],16]+51,inf)).midicps,LFNoise0.kr(3,11)),200);3.do({|i|b=DelayC.ar(b*0.2,3,i)+b});b}</description>
+  <guid>400396318369001472</guid>
+  <pubDate>2013-11-12 22:54:55</pubDate>
+  <author>glitchlich</author>
+ </item>
+ <item>
+  <title>400395959034580992</title>
+  <description>Ndef(\p,{n=Ndef.ar(\p);Limiter.ar(AllpassN.ar(SyncSaw.ar(n,(Pitch.kr(n,3,3)[0]*2-88200).dup%88200).trunc(0.5**4),1,1/[3.25,3.35],13))}).play</description>
+  <guid>400395959034580992</guid>
+  <pubDate>2013-11-12 22:53:30</pubDate>
+  <author>glitchlich</author>
+ </item>
+ <item>
+  <title>400395379461476352</title>
+  <description>play{f=Duty.ar([0.1,0.09],0,Dseq([0,5,4,7,Drand([12,8,10,11,4])]+72,inf)).midicps*[0.5,1];GVerb.ar(SyncSaw.ar(f,[f[1],f[0]*4])*0.1,300,1)}</description>
+  <guid>400395379461476352</guid>
+  <pubDate>2013-11-12 22:51:12</pubDate>
+  <author>glitchlich</author>
+ </item>
+ <item>
+  <title>400394976862810112</title>
+  <description>play{SyncSaw.ar([3,4],Duty.ar(1/Dstutter(60,Dwhite(5,159)),0,Dseries(0,Dstutter(60,Dwhite(-330,9)/300))%1).linexp(0,1,20,3000)).trunc(0.25)}</description>
+  <guid>400394976862810112</guid>
+  <pubDate>2013-11-12 22:49:36</pubDate>
+  <author>glitchlich</author>
+ </item>
+ <item>
+  <title>400394846663225344</title>
+  <description>play{p=Impulse.ar(2,[1/3,0]);d=Demand.ar(p,0,Dseq([0,4,7,4,1,4,7,4,2,5,7,5,2,5,7,5],inf)).midicps*16;Pluck.ar(PinkNoise.ar,p,1,1/d,3).sum}</description>
+  <guid>400394846663225344</guid>
+  <pubDate>2013-11-12 22:49:05</pubDate>
+  <author>glitchlich</author>
+ </item>
+ <item>
+  <title>400394639066136576</title>
+  <description>play{{|i|r=LFNoise2.ar(0.3,0.5,0.5);n=DelayC.ar(In.ar(i*r),1,i);Out.ar(i*r,Ringz.ar(n+Impulse.ar(),Pitch.kr(n)[0]*i,200).softclip)}!30}</description>
+  <guid>400394639066136576</guid>
+  <pubDate>2013-11-12 22:48:15</pubDate>
+  <author>glitchlich</author>
+ </item>
+ <item>
+  <title>400394388108369920</title>
+  <description>play{b=LocalBuf(8192,4);d=Dust.kr(9)+Dust2.kr([4,4]);r=PlayBuf.ar(2,b,TExpRand.kr(0.01,19,d),d,0,1)/4;f=FFT(b,d+(d*r));r.clip2(1)}</description>
+  <guid>400394388108369920</guid>
+  <pubDate>2013-11-12 22:47:15</pubDate>
+  <author>glitchlich</author>
+ </item>
+ <item>
+  <title>400394089943678978</title>
+  <description>{|i|Pbind(\instrument,play{|freq|LFNoise0.ar([freq,freq])/2}.defName,\legato,0.35,\scale,(1..9),\degree,Pbrown(0,79,8),\dur,i+1/9).play}!8</description>
+  <guid>400394089943678978</guid>
+  <pubDate>2013-11-12 22:46:04</pubDate>
+  <author>glitchlich</author>
+ </item>
+ <item>
+  <title>400393689882558464</title>
+  <description>b=Buffer.alloc(s,44100,1,{|u|u.chebyMsg(Array.fill(1028,{2.rand}))});play{Shaper.ar(b,Osc.ar(b,0.004*Stepper.ar(Pulse.ar([4,3]),0,0,9)))}</description>
+  <guid>400393689882558464</guid>
+  <pubDate>2013-11-12 22:44:29</pubDate>
+  <author>glitchlich</author>
+ </item>
+ <item>
+  <title>426407944557580288</title>
+  <description>play{GVerb.ar(TGrains.ar(2,Pulse.ar(3),Buffer.read(s,Platform.resourceDir+/+"sounds/a11wlk01.wav"),Sweep.ar(x=Pulse.ar(4s)),x,Sweep.ar(x)))}</description>
+  <guid>426407944557580288</guid>
+  <pubDate>2014-01-23 17:35:50</pubDate>
+  <author>aucotsi</author>
+ </item>
+ <item>
+  <title>423989278314467328</title>
+  <description>play{a=SinOsc;Formlet.ar(a.ar(Convolution.ar(b=GbmanN.ar(Stepper.ar(a.ar(5))),b)),a.ar(Sweep.ar(a.ar(1/9),2)).range(1e3,4e3),0.01,1/99)!2}//</description>
+  <guid>423989278314467328</guid>
+  <pubDate>2014-01-17 01:24:55</pubDate>
+  <author>aucotsi</author>
+ </item>
+ <item>
+  <title>423987205799817216</title>
+  <description>play{a=SinOsc.ar(_);f=Stepper.ar(LFPulse.ar(53+(329*a.(Duty.ar(1,0,Dseq([5,5,5,7],inf))))));a.(334/f).tanh!2}// #sc140 #SuperCollider</description>
+  <guid>423987205799817216</guid>
+  <pubDate>2014-01-17 01:16:41</pubDate>
+  <author>aucotsi</author>
+ </item>
+ <item>
+  <title>408981450994638848</title>
+  <description>play{a=LFCub;GVerb.ar(Formlet.ar(a.ar(Convolution.ar(b=LinCongN.ar(5),b)),a.ar(Sweep.ar(a.ar(1/9),3)).range(1999,3999),0.01,0.1))}// #sc140</description>
+  <guid>408981450994638848</guid>
+  <pubDate>2013-12-06 15:29:11</pubDate>
+  <author>aucotsi</author>
+ </item>
+ <item>
+  <title>408245956849569792</title>
+  <description>m=[GrainSin,GrainFM];{|i|play{b=GbmanN.ar(_);CombN.ar(GVerb.ar(m[i].ar(2,Saw.kr(9-i),t=9e-3,c=Convolution.ar(b.(4),b.(5))/4,c/t)),t,t)/9}}!2</description>
+  <guid>408245956849569792</guid>
+  <pubDate>2013-12-04 14:46:35</pubDate>
+  <author>aucotsi</author>
+ </item>
+ <item>
+  <title>408233751928250368</title>
+  <description>play{a=SinOsc;p=Pulse;WhiteNoise.ar*p.kr(10,1e-2)+a.ar(39*p.ar(1))+FreeVerb.ar(a.ar(Convolution.ar(b=HenonN.ar(8),b)))!2/9}// #SuperCollider</description>
+  <guid>408233751928250368</guid>
+  <pubDate>2013-12-04 13:58:05</pubDate>
+  <author>aucotsi</author>
+ </item>
+ <item>
+  <title>407830556072624128</title>
+  <description>play{FreeVerb2.ar(RLPF.ar(a=Convolution.ar(StandardN.ar([1,2], 2),Gendy1.ar(4,1,1,1,20,999)),SinOsc.ar(999).range(9,1e4)),a)/222}// #sc140</description>
+  <guid>407830556072624128</guid>
+  <pubDate>2013-12-03 11:15:56</pubDate>
+  <author>aucotsi</author>
+ </item>
+ <item>
+  <title>406837095844421633</title>
+  <description>play{FreeVerb2.ar(b=RLPF.ar(Klank.ar(`[(1..82)],Impulse.ar(1),0),SinOsc.ar(122).range(10,3300)),b)/99}// #SuperCollider #sc140</description>
+  <guid>406837095844421633</guid>
+  <pubDate>2013-11-30 17:28:16</pubDate>
+  <author>aucotsi</author>
+ </item>
+ <item>
+  <title>403922218574295040</title>
+  <description>fork{loop{http://t.co/0RA0Zf1b7G{|i|{SinOsc.ar(i.ascii)*EnvGen.ar(Env.perc,doneAction:2)!2}.play;i.post;1.wait;};"\r".post}}// #sc140</description>
+  <guid>403922218574295040</guid>
+  <pubDate>2013-11-22 16:25:36</pubDate>
+  <author>aucotsi</author>
+ </item>
+ <item>
+  <title>400609415490830336</title>
+  <description>ProxySpace.push;~a0.play;~a1.play;fork{loop{2.do{|i|currentEnvironment[(\a++i).asSymbol]={GVerb.ar(LFTri.ar(99+9.rand2),1,i)/2};0.2.wait}}}</description>
+  <guid>400609415490830336</guid>
+  <pubDate>2013-11-13 13:01:42</pubDate>
+  <author>aucotsi</author>
+ </item>
+ <item>
+  <title>400609338684760064</title>
+  <description>play{a=SinOsc;p=Pulse;GVerb.ar(WhiteNoise.ar*p.ar(TChoose.kr(a.kr(2),[5,8,20,30]))*p.ar(16,0.1))+a.ar(97*p.ar(4),0,p.kr(5,add:1))}// #sc140</description>
+  <guid>400609338684760064</guid>
+  <pubDate>2013-11-13 13:01:23</pubDate>
+  <author>aucotsi</author>
+ </item>
+ <item>
+  <title>400609284100071424</title>
+  <description>play{GVerb.ar(IFFT(PV_BrickWall(FFT(Buffer.alloc(s,1024),WhiteNoise.ar*Pulse.ar(8,2e-2)),SinOsc.ar(Duty.kr(1,0,Dseq((10..19),inf))))))}</description>
+  <guid>400609284100071424</guid>
+  <pubDate>2013-11-13 13:01:10</pubDate>
+  <author>aucotsi</author>
+ </item>
+ <item>
+  <title>400609206853586945</title>
+  <description>play{p=Pulse;WhiteNoise.ar*p.ar(8,h=3e-3)+GVerb.ar(GrainSin.ar(2,p.ar(8),n=h*t=LFNoise0.ar,1/n),2)+PMOsc.ar(9*p.ar(4*t),111,p.kr(6,t,1,1))}</description>
+  <guid>400609206853586945</guid>
+  <pubDate>2013-11-13 13:00:52</pubDate>
+  <author>aucotsi</author>
+ </item>
+ <item>
+  <title>400609066495377408</title>
+  <description>play{a=SinOsc;p=Pulse;WhiteNoise.ar*p.kr(8,0.01)+a.ar(98*n=p.ar(4),0,p.kr(2,add:1))+GVerb.ar(a.ar(99*n)+p.ar(p.kr(3*n)),1,mul:0.1)}// #sc140</description>
+  <guid>400609066495377408</guid>
+  <pubDate>2013-11-13 13:00:19</pubDate>
+  <author>aucotsi</author>
+ </item>
+ <item>
+  <title>400603496140906496</title>
+  <description>play{p=Pulse;GVerb.ar(IFFT(PV_BrickWall(FFT(Buffer.alloc(s,128),WhiteNoise.ar*p.ar(8,5e-4)+SinOsc.ar(9*p.ar(1),0,n=p.kr(p.ar(5)))),n)))}//w8</description>
+  <guid>400603496140906496</guid>
+  <pubDate>2013-11-13 12:38:10</pubDate>
+  <author>aucotsi</author>
+ </item>
+ <item>
+  <title>329959873905303552</title>
+  <description>2.do{|i|SynthDef(\++i,{|f|a=[PinkNoise,LFCub];Out.ar(0,a[i].ar(f)*Line.ar(1,0,k=1/6))}).add;Pbind(\instrument,\++i,\f,80*i+k,\dur,i+k).play}</description>
+  <guid>329959873905303552</guid>
+  <pubDate>2013-05-02 14:05:38</pubDate>
+  <author>aucotsi</author>
+ </item>
+ <item>
+  <title>407031233827184640</title>
+  <description>play{a=Dust.kr(1/(10..20));g=60;f=(a*g+g).round.midicps;b=GrainFM.ar(2,a,2,g,f*2.87,3,a*2-1)*0.05;c=b.sum;c+GVerb.ar(c.sum,100,30)}//#sc140</description>
+  <guid>407031233827184640</guid>
+  <pubDate>2013-12-01 06:19:43</pubDate>
+  <author>joshpar</author>
+ </item>
+ <item>
+  <title>267475984792571904</title>
+  <description>{n=LFNoise0;GVerb.ar(GrainSin.ar(1,Dust.kr([1,2]),n.kr(10,0.001,0.002),n.kr(1,1e3,SinOsc.kr([0.01,0.02],0,1e4,1e4)))*0.2,200,300).sum}.play;</description>
+  <guid>267475984792571904</guid>
+  <pubDate>2012-11-11 03:56:58</pubDate>
+  <author>joshpar</author>
+ </item>
+ <item>
+  <title>256121150239805441</title>
+  <description>@TamikoN @dabujaber if you can play it over a headphone jack (attached to phone?) you can also capture it very well. more then happy to help</description>
+  <guid>256121150239805441</guid>
+  <pubDate>2012-10-10 19:56:55</pubDate>
+  <author>joshpar</author>
+ </item>
+ <item>
+  <title>323184499078873089</title>
+  <description>{Splay.ar(Saw.ar(EnvGen.ar(Env([60,40,43],[0.2,0.2]))*[2,3,4,5,7,9]))*EnvGen.ar(Env.perc)*0.2}.play #sc140 #supercollider</description>
+  <guid>323184499078873089</guid>
+  <pubDate>2013-04-13 21:22:43</pubDate>
+  <author>brunoruviaro</author>
+ </item>
+ <item>
+  <title>440908614862389248</title>
+  <description>play{o=LFSaw.ar([0.4,0.3]);x=GVerb.ar(LFSaw.ar(60)*EnvGen.ar(Env.perc(0,0.1),[o&gt;0,o&lt;0]),5,5)*0.08;CombC.ar(x,0.2,[0.02,0.015],15,1,x)/2;}</description>
+  <guid>440908614862389248</guid>
+  <pubDate>2014-03-04 17:56:20</pubDate>
+  <author>Schemawound</author>
+ </item>
+</channel>
+</rss>
