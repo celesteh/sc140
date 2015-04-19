@@ -93,6 +93,6 @@ while true
     #fi
 
 	sleep 1
-	$program_dir/jack_script.sh || sudo shutdown -r now
+	$program_dir/jack_script.sh 
 	sleep 1
 done

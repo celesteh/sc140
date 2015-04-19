@@ -99,7 +99,7 @@ AppClock.sched(0, {
 
 
 update_gui = {|code, author|
-	var colour, steps, count, state, reformat;
+	var colour, steps, count, state, reformat, formatted;
 
 	// break up the tweets after a set number of chars
 	reformat = { |code, width=33|
@@ -149,6 +149,7 @@ update_gui = {|code, author|
 
 		(state == 0).if ( // fade in
 			{
+				(tweet.string == "").if ({ state = 1 }); // if there's nothing to fade, don't bother
 				colour = Color.green(count.linlin(0, steps, 0, 1));
 				tweet.stringColor = colour;
 				count = count -1;
@@ -165,6 +166,7 @@ update_gui = {|code, author|
 								chars_per_line), author);
 							} , {
 								tweet.string = "";
+								return_val = nil;
 						});
 						return_val = 1;
 						state = 2;
