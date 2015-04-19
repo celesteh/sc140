@@ -58,7 +58,7 @@ cp $program_dir/rss.xml /tmp/ #start with a pre-downloaded set of tweets in case
 sleep 1
 
 # ok, let's try getting new tweets every 5 minutes from now on, but make it nice so it doesn't disrupt the rest of the program
-( cd $program_dir ; while true; sleep 300; do nice -n 10 python $program_dir/sctweet.py ;  done ) &
+( cd $program_dir ; sleep 60 ;  while true; sleep 300; do nice -n 10 python $program_dir/sctweet.py ;  done ) &
 
 source $program_dir/jack_script.sh 
 
