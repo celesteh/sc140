@@ -52,7 +52,7 @@ sleep 1
 # ok, let's try getting new tweets every 5 minutes from now on, but make it nice so it doesn't disrupt the rest of the program
 { while true; sleep 300; do nice -n 10 python $program_dir/sctweet.py ;  done } &
 
-$program_dir/jack_script.sh
+$program_dir/jack_script.sh 
 
 
 sleep 2
@@ -93,6 +93,6 @@ while true
     #fi
 
 	sleep 1
-	$program_dir/jack_script.sh
+	$program_dir/jack_script.sh || sudo shutdown -r now
 	sleep 1
 done
