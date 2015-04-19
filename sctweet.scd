@@ -178,12 +178,13 @@ update_gui = {|code, author|
 								state = 2;
 							} , {
 								tweet.string = "";
+								tweet.stringColor = Color.black;
 								return_val = nil;
 						});
 
 					},{ // fade back in
 						//state.postln;
-						(tweet.string == "").if ({ return_val = nil; state = 1} , {// if there's nothing to fade, don't bother
+						(tweet.string == "").if ({ return_val = nil; state = 1; tweet.stringColor = Color.black;} , {// if there's nothing to fade, don't bother
 							colour = Color.green(count.linlin(1, steps, 0, 1));
 							tweet.stringColor = colour;
 							count = count +1;
