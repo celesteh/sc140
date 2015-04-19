@@ -487,7 +487,7 @@ playnew = { |semaphore|
 
 
 // pi
-s.waitForBoot(/*onFailure:{1.exit},*/ onComplete: {
+s.waitForBoot(onFailure:{1.exit}, onComplete: {
 
 	var action;
 
