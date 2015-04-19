@@ -34,7 +34,8 @@ if aplay -l | grep -qi ultra
 	jackd  -d alsa -d hw:Ultra -r 44100 &
   else
 	#start jack with default hardware
-	jackd  -d alsa -d hw:0 -r 44100 &
+	#jackd  -d alsa -d hw:0 -r 44100 &
+	jackd -p32 -dalsa -dhw:0,0 -p1024 -n3 -s &
 fi
 
 sleep 2

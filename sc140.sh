@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # set this to the directory where you put all this stuff
-program_dir=/home/celesteh/Documents/code/sc140
+program_dir=/home/pi/sc140
 
 # this program starts with a lot of sleeping, in case you put it in your startup items.
 
@@ -34,6 +34,10 @@ while true
 
         killall scsynth
         sleep 1
+
+	/usr/local/bin/scsynth -u 57110 &
+	sleep 1	
+
         /usr/local/bin/sclang $program_dir/sctweet.scd &
         pid=$!
         sleep 1
@@ -42,5 +46,12 @@ while true
         sleep 1
         wait $pid #wait for sclang to exit
         kill $alive_pid # this process no longer has the right pid for sclang
+
+	sleep 1
         killall scsynth
+	killall jackd
+
+	sleep 1
+	$program_dir/jack_script.sh
+	sleep 1
 done

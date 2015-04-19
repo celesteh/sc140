@@ -11,7 +11,7 @@ min_dur = 5;
 // after how many chars do we wrap the diplay text?
 chars_per_line = 33;
 // don't forget to edit this file to have your auth codes
-pyhton_script_path = "/home/celesteh/Documents/code/scweets/sctweet.py";
+pyhton_script_path = "/home/pi/sc140/sctweet-cch.py";
 
 
 /*
@@ -360,6 +360,8 @@ play = { |item, should_move=false, semaphore|
 
 	var play, syn, lastrms, osc_listener, startTime, endTime;
 	click.value;
+	//pi
+	s.boot;
 
 	//"play".postln;
 	//item.class.postln;
@@ -384,6 +386,8 @@ play = { |item, should_move=false, semaphore|
 		play.if({
 			//"playing".postln;
 			startTime = Date.getDate;
+
+			item.code.postln;
 
 			update_gui.(item.code, item.author);
 
@@ -471,8 +475,8 @@ playnew = { |semaphore|
 
 
 
-
-s.waitForBoot(onFailure:{1.exit}, onComplete: {
+// pi
+s.waitForBoot(/*onFailure:{1.exit},*/ onComplete: {
 
 	var action;
 
