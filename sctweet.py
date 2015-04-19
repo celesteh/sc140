@@ -64,7 +64,7 @@ tweetlist = api.list_timeline(list_id=96598344, count=200)
 # my timeline
 timeline = api.home_timeline(count=100)
 
-search_terms = ['#sctweet', '#sc140', '#supercollider', '#sc']
+search_terms = ['#sctweet', '#sc140', '#supercollider', '#sc', 'SinOsc']
 
 # ok, so get also tweets tagged #sctweet #sc140 and #supercollider
 #sctweet = api.search(q='#sctweet',count=100)

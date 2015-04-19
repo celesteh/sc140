@@ -1,6 +1,6 @@
 (
 var fetch, de_dup, playnew, new_tweets, old_tweets, clear_vars, wait_time, fetcher, do_fetch, dur, rout, pyhton_script_path,
-busy, click, clicker, f_task, stop_tweet, fetch_click, monitor, fade_time, play, min_dur;
+busy, click, clicker, f_task, stop_tweet, fetch_click, monitor, fade_time, play, min_dur, bad_tweets;
 var tweet_mod_time;
 var update_gui, tweet, window, chars_per_line;
 var semaphore;
@@ -30,6 +30,7 @@ TODO:
 semaphore = Semaphore.new;
 new_tweets = [];
 old_tweets = [];
+bad_tweets = [];
 s.options.memSize = s.options.memSize*8;
 fetcher = Semaphore.new;
 busy = Semaphore.new;
@@ -38,11 +39,20 @@ fade_time = 45.reciprocal;
 
 click =  {
 	clicker = 2;
-	"touch /tmp/stillAlive".unixCmd;
+	"touch /tmp/sc140/stillAlive".unixCmd;
 };
 
 click.value;
 
+// get bad tweets
+File.exists("/tmp/sc140/badtweets"). if ({
+	bad_tweets = FileReader.read("/tmp/sc140/badtweets", true, true);
+	bad_tweets.isNil.if ({
+		bad_tweets = [];
+		} , {
+			bad_tweets= bad_tweets.flat;
+	});
+});
 
 
 // set up graphics
@@ -164,15 +174,16 @@ update_gui = {|code, author|
 							{
 								tweet.string = "%\n\n\t-\@%".format(reformat.(code,
 								chars_per_line), author);
+								return_val = 1;
+								state = 2;
 							} , {
 								tweet.string = "";
 								return_val = nil;
 						});
-						return_val = 1;
-						state = 2;
+
 					},{ // fade back in
 						//state.postln;
-						(tweet.string == "").if ({ return_val = nil} , {// if there's nothing to fade, don't bother
+						(tweet.string == "").if ({ return_val = nil; state = 1} , {// if there's nothing to fade, don't bother
 							colour = Color.green(count.linlin(1, steps, 0, 1));
 							tweet.stringColor = colour;
 							count = count +1;
@@ -210,7 +221,7 @@ de_dup = { |newitems, olditems|
 
 
 do_fetch = {|semaphore, niceness, action, first = false|
-	var doc, elements, channel, nodes, nice, cmd, cmd_act;
+	var doc, elements, channel, nodes, nice, cmd, cmd_act, tweet;
 
 	"fetching new tweets".postln;
 	fetch_click = 3;
@@ -227,16 +238,21 @@ do_fetch = {|semaphore, niceness, action, first = false|
 	cmd_act = {
 
 		fetch_click = 2;
-		(File.mtime("/tmp/rss.xml") != tweet_mod_time).if({
-			tweet_mod_time = File.mtime("/tmp/rss.xml");
+		(File.mtime("/tmp/sc140/rss.xml") != tweet_mod_time).if({
+			tweet_mod_time = File.mtime("/tmp/sc140/rss.xml");
 			//waittime.wait;
 			//"done waiting".postln;
-			doc = DOMDocument.new("/tmp/rss.xml");
+			doc = DOMDocument.new("/tmp/sc140/rss.xml");
 			channel = doc.getElementsByTagName("channel");
 			nodes = channel.last.getChildNodes;
 			nodes.do({|node|
 				(node.getNodeName == "item").if({
-					elements = elements.add(SCTweet(node));
+					tweet = SCTweet(node);
+					// skip bad tweets
+					bad_tweets.includes(tweet.id).not.if({
+						elements = elements.add(tweet)
+					});
+					//elements = elements.add(SCTweet(node));
 				})
 			});
 
@@ -259,7 +275,7 @@ do_fetch = {|semaphore, niceness, action, first = false|
 	};
 
 	first.if({
-		File.exists("/tmp/rss.xml").if({
+		File.exists("/tmp/sc140/rss.xml").if({
 			tweet_mod_time = 0;
 			busy.wait;
 			cmd_act.fork;
@@ -343,7 +359,7 @@ stop_tweet = { |tweet|
 		);
 	});
 
-	update_gui.();
+	//update_gui.();
 	60.do({|i|
 		Server.default.volume.volume = i* -1;
 		fade_time.wait;
@@ -376,6 +392,9 @@ play = { |item, should_move=false, semaphore|
 
 	//"play".postln;
 	//item.class.postln;
+
+
+
 	item.playable.if({
 
 		syn = Synth(\stereoListenForSilence,  nil, RootNode(s), \addToTail);
@@ -411,6 +430,8 @@ play = { |item, should_move=false, semaphore|
 
 			//monitor for loudness
 
+			// make a note of what we're playing
+			"echo \"%\" > /tmp/sc140/playing".format(item.id).postln.unixCmd;
 
 
 			lastrms=Array.fill(min_dur, {1});
@@ -450,6 +471,10 @@ play = { |item, should_move=false, semaphore|
 		});
 		//item.stop;
 		stop_tweet.value(item);
+
+		// remove note
+		"rm /tmp/sc140/playing".unixCmd;
+
 		1.wait;
 		click.value;
 	});
