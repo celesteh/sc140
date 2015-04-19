@@ -3,6 +3,12 @@
 
 # now setup the audio
 
+if [ -f /etc/rpi-issue ]
+    then
+        export SC_JACK_DEFAULT_INPUTS="system"
+        export SC_JACK_DEFAULT_OUTPUTS="system"
+fi
+
 #pulseaudio --kill
 
 # is the ultra attacked
