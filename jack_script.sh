@@ -45,6 +45,7 @@ if aplay -l | grep -qi ultra
     if [ -f /etc/rpi-issue ]
         then
             amixer cset numid=3 1
+            sleep 1
             ( jackd -p 32 -d alsa -d hw:0,0 -r 44100 -p 1024 -n3  -s || sudo shutdown -r now ) &
     fi
     if [ !  -f /etc/rpi-issue  ]
