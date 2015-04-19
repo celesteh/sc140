@@ -2,12 +2,25 @@ import tweepy
 import re
 import codecs
 
+config = {}
+ 
+file_name = "sc140.config"
+config_file= open(file_name)
+ 
+for line in config_file:
+    line = line.strip()
+    if line and line[0] is not "#" and line[-1] is not "=":
+        var,val = line.rsplit("=",1)
+        config[var.strip()] = val.strip()
+ 
+#print config
+
 # Consumer keys and access tokens, used for OAuth
 # Get these from Twitter by registering as a developer
-consumer_key = ''
-consumer_secret = ''
-access_token = ''
-access_token_secret = ''
+consumer_key = config['consumer_key']
+consumer_secret = config['consumer_secret']
+access_token = config['access_token']
+access_token_secret = config['access_token_secret']
  
 # OAuth process, using the keys and tokens
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)

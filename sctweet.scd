@@ -1,6 +1,7 @@
 (
 var fetch, de_dup, playnew, new_tweets, old_tweets, clear_vars, wait_time, fetcher, do_fetch, dur, rout, pyhton_script_path,
 busy, click, clicker, f_task, stop_tweet, fetch_click, monitor, fade_time, play, min_dur;
+var tweet_mod_time;
 var update_gui, tweet, window, chars_per_line;
 var semaphore;
 
@@ -11,7 +12,7 @@ min_dur = 5;
 // after how many chars do we wrap the diplay text?
 chars_per_line = 33;
 // don't forget to edit this file to have your auth codes
-pyhton_script_path = "/home/pi/sc140/sctweet-cch.py";
+pyhton_script_path = "/home/celesteh/Documents/code/sc140/sctweet.py";
 
 
 /*
@@ -222,35 +223,40 @@ do_fetch = {|semaphore, niceness, action, first = false|
 	cmd_act = {
 
 		fetch_click = 2;
-		//waittime.wait;
-		//"done waiting".postln;
-		doc = DOMDocument.new("/tmp/rss.xml");
-		channel = doc.getElementsByTagName("channel");
-		nodes = channel.last.getChildNodes;
-		nodes.do({|node|
-			(node.getNodeName == "item").if({
-				elements = elements.add(SCTweet(node));
-			})
-		});
+		(File.mtime("/tmp/rss.xml") != tweet_mod_time).if({
+			tweet_mod_time = File.mtime("/tmp/rss.xml");
+			//waittime.wait;
+			//"done waiting".postln;
+			doc = DOMDocument.new("/tmp/rss.xml");
+			channel = doc.getElementsByTagName("channel");
+			nodes = channel.last.getChildNodes;
+			nodes.do({|node|
+				(node.getNodeName == "item").if({
+					elements = elements.add(SCTweet(node));
+				})
+			});
 
 
-		semaphore.wait;
+			semaphore.wait;
 
-		elements = de_dup.(elements, old_tweets);
-		elements = de_dup.(elements, new_tweets);
-		new_tweets = new_tweets.add(elements);
-		new_tweets = new_tweets.flat;
-		"% new tweets downloaded\n".postf(new_tweets.size);
-		semaphore.signal;
-		busy.signal;
-		//"next".postln;
-		action.notNil.if({
-			action.value
-		});
+			elements = de_dup.(elements, old_tweets);
+			elements = de_dup.(elements, new_tweets);
+			new_tweets = new_tweets.add(elements);
+			new_tweets = new_tweets.flat;
+			new_tweets = new_tweets.scramble;
+			"% new tweets downloaded\n".postf(new_tweets.size);
+			semaphore.signal;
+			busy.signal;
+			//"next".postln;
+			action.notNil.if({
+				action.value
+			});
+		}); // end if
 	};
 
 	first.if({
 		File.exists("/tmp/rss.xml").if({
+			tweet_mod_time = 0;
 			busy.wait;
 			cmd_act.fork;
 			action.notNil.if({
@@ -263,8 +269,9 @@ do_fetch = {|semaphore, niceness, action, first = false|
 
 
 	busy.wait;
-
-	cmd.unixCmd(cmd_act, false);
+	"fetching".postln;
+	//cmd.unixCmd(cmd_act, false);
+	cmd_act.value();
 };
 
 
@@ -416,7 +423,9 @@ play = { |item, should_move=false, semaphore|
 
 
 
-			dur.wait;
+			(dur-5).wait;
+			update_gui.();
+			5.wait;
 
 			endTime = Date.getDate;
 			syn.free;

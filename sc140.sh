@@ -1,7 +1,29 @@
 #!/bin/bash
 
-# set this to the directory where you put all this stuff
-program_dir=/home/pi/sc140
+# read our config file
+. sc140.config
+
+# get the dir of this script
+pushd `dirname $0` > /dev/null
+program_dir=`pwd`
+popd > /dev/null
+
+#get the dir of SuperCollider
+if [ -e /usr/local/bin/sclang ] 
+    then
+        sc_dir=/usr/local/bin
+    else
+        sc_dir=/usr/bin
+fi
+
+#are we on a raspberry pi
+if [ -f /etc/rpi-issue ]
+    then
+        raspberry=1
+    else
+        raspberry=0
+fi
+
 
 # this program starts with a lot of sleeping, in case you put it in your startup items.
 
@@ -18,9 +40,18 @@ sleep 20
 
 sleep 10
 
+cp $program_dir/rss.xml /tmp/ #start with a pre-downloaded set of tweets in case of network delay
+
+# let's try downloading some tweets
+#python $program_dir/sctweet.py
+
+sleep 1
+
+# ok, let's try getting new tweets every 5 minutes from now on, but make it nice so it doesn't disrupt the rest of the program
+{ while true; sleep 300; do nice -n 10 python $program_dir/sctweet.py ;  done } &
+
 $program_dir/jack_script.sh
 
-cp $program_dir/rss.xml /tmp/ #start with a pre-downloaded set of tweets in case of network delay
 
 sleep 2
 
@@ -35,10 +66,14 @@ while true
         killall scsynth
         sleep 1
 
-	/usr/local/bin/scsynth -u 57110 &
+        if [ $raspberry -ne 0 ]
+            then
+            	$sc_dir/scsynth -u 57110 &
+        fi
+
 	sleep 1	
 
-        /usr/local/bin/sclang $program_dir/sctweet.scd &
+        $sc_dir/sclang $program_dir/sctweet.scd $raspberry $dur $min_dur $chars_per_line &
         pid=$!
         sleep 1
         $program_dir/keepAlive.sh $pid &
@@ -49,7 +84,11 @@ while true
 
 	sleep 1
         killall scsynth
-	killall jackd
+
+    #if [ $raspberry ne 0 ]
+    #    then
+        	killall jackd
+    #fi
 
 	sleep 1
 	$program_dir/jack_script.sh
