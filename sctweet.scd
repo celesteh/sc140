@@ -498,7 +498,7 @@ s.waitForBoot(onFailure:{1.exit}, onComplete: {
 		ReplaceOut.ar(0, LeakDC.ar(input).tanh);
 	}).add;
 
-	s.meter;
+	//s.meter;
 
 	action = {
 
