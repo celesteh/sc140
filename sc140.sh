@@ -24,12 +24,11 @@ if [ -f /etc/rpi-issue ]
         raspberry=1
 
         # let's setup a swap drive
-        if [ ! -e /swapfile ]
-            then
-                sudo dd if=/dev/zero of=/swapfile bs=1MB count=512
-                sudo mkswap /swapfile
-        fi
-        sudo swapon /swapfile        
+        #if [ ! -e /swapfile ]
+        #    then
+        #        sudo dd if=/dev/zero of=/swapfile bs=1MB count=512 && sudo mkswap /swapfile
+        #fi
+        #sudo swapon /swapfile        
 
     else
         raspberry=0

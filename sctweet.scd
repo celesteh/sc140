@@ -498,6 +498,8 @@ s.waitForBoot(onFailure:{1.exit}, onComplete: {
 		ReplaceOut.ar(0, LeakDC.ar(input).tanh);
 	}).add;
 
+	s.meter;
+
 	action = {
 
 		SkipJack.stop("start_fetch");
