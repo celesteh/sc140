@@ -1,12 +1,14 @@
 #!/bin/bash
 
-# read our config file
-. sc140.config
 
 # get the dir of this script
 pushd `dirname $0` > /dev/null
 program_dir=`pwd`
 popd > /dev/null
+
+# read our config file
+. $program_dir/sc140.config
+
 
 #get the dir of SuperCollider
 if [ -e /usr/local/bin/sclang ] 
