@@ -1,5 +1,8 @@
 #!/bin/bash
 
+rm /tmp/sc140/stillAlive
+
+sleep 60
 
 while true
     do
