@@ -33,8 +33,10 @@ if aplay -l | grep -qi ultra
 	#start jack
     if [ -f /etc/rpi-issue ]
         then
-    	    { jackd  -d alsa -d hw:Ultra -r 44100 || sudo shutdown -r now } &
-        else
+    	    ( jackd  -d alsa -d hw:Ultra -r 44100 || sudo shutdown -r now ) &
+    fi
+    if [ !  -f /etc/rpi-issue  ]
+        then
             jackd  -d alsa -d hw:Ultra -r 44100 &
    fi
   else
@@ -42,8 +44,10 @@ if aplay -l | grep -qi ultra
 	#jackd  -d alsa -d hw:0 -r 44100 &
     if [ -f /etc/rpi-issue ]
         then
-            { jackd -p32 -dalsa -dhw:0,0 -p1024 -n3 -s || sudo shutdown -r now } &
-        else
+            ( jackd -p32 -dalsa -dhw:0,0 -p1024 -n3 -s || sudo shutdown -r now ) &
+    fi
+    if [ !  -f /etc/rpi-issue  ]
+        then
         	jackd -p32 -dalsa -dhw:0,0 -p1024 -n3 -s &
     fi
 fi
