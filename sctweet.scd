@@ -366,8 +366,9 @@ stop_tweet = { |tweet|
 		fade_time.wait;
 	});
 
-
-	tweet.stop;
+	tweet.notNil.if({
+		tweet.stop;
+	});
 
 	CmdPeriod.run;
 	0.5.wait;
@@ -449,9 +450,9 @@ play = { |item, should_move=false, semaphore|
 
 
 
-			(dur-5).wait;
+			(dur-10).wait;
 			update_gui.();
-			5.wait;
+			10.wait;
 
 			endTime = Date.getDate;
 			syn.free;
@@ -605,7 +606,7 @@ s.waitForBoot(onFailure:{1.exit}, onComplete: {
 				rout.play
 			});
 
-			(clicker <= -2).if({
+			(clicker <= -1).if({
 				"rout is hopelessly stuck".postln;
 				//f_task.stop;
 				//fetcher.signal;
@@ -615,7 +616,7 @@ s.waitForBoot(onFailure:{1.exit}, onComplete: {
 				rout.play;
 			});
 
-			(clicker <= -3).if({
+			(clicker <= -2).if({
 				//"one last try to restart the rout".postln;
 				//f_task.stop;
 				//fetcher.signal;
@@ -623,10 +624,12 @@ s.waitForBoot(onFailure:{1.exit}, onComplete: {
 				//semaphore.signal;
 				//rout.reset;
 				//rout.play;
-				1.exit;
+				stop_tweet.();
+				rout.reset;
+				rout.play;
 			});
 
-			(clicker < -4).if({
+			(clicker < -3).if({
 				// we're well and truly fucked
 				1.exit;
 			});
