@@ -21,6 +21,8 @@ consumer_key = config['consumer_key']
 consumer_secret = config['consumer_secret']
 access_token = config['access_token']
 access_token_secret = config['access_token_secret']
+
+rss_file = config['rss']
  
 # OAuth process, using the keys and tokens
 auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -175,7 +177,7 @@ for status in (tweets):
     #endif unique
 #endfor
 
-rss = open('/tmp/rss.xml', 'w')
+rss = open(rss_file, 'w')
 rss.write('<?xml version="1.0" encoding="UTF-8" ?>\n<rss version="2.0">\n<channel>\n <title>Tweets</title>\n')
 
 

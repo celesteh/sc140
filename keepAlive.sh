@@ -1,6 +1,8 @@
 #!/bin/bash
 
-rm /tmp/sc140/stillAlive
+. sc140.config
+
+rm $alive
 
 sleep 60
 
@@ -8,13 +10,13 @@ while true
     do
 
 
-        if [ ! -f /tmp/sc140/stillAlive ]; then
+        if [ ! -f $alive ]; then
             echo "File not found! - scweets has not checked in and must be hung"
             kill $1
             exit 0
         else
 
-            rm /tmp/sc140/stillAlive
+            rm $alive
         fi
 
         sleep 300

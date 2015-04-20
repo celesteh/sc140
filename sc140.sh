@@ -9,6 +9,7 @@ popd > /dev/null
 # read our config file
 . $program_dir/sc140.config
 
+echo $tmp
 
 #get the dir of SuperCollider
 if [ -e /usr/local/bin/sclang ] 
@@ -36,10 +37,13 @@ fi
 
 
 #get rid of sc140 stuff in tmp
-rm -rf /tmp/sc140
+rm -rf $tmp
 
 # and start afresh
-mkdir /tmp/sc140
+mkdir $tmp
+# put the config file there so supercollider can find it
+cp $program_dir/sc140.config $tmp
+cp $program_dir/rss.xml $tmp #start with a pre-downloaded set of tweets in case of network delay
 
 # this program starts with a lot of sleeping, in case you put it in your startup items.
 
@@ -56,7 +60,6 @@ sleep 20
 
 sleep 10
 
-cp $program_dir/rss.xml /tmp/sc140/ #start with a pre-downloaded set of tweets in case of network delay
 
 # let's try downloading some tweets
 #python $program_dir/sctweet.py
@@ -73,9 +76,11 @@ sleep 2
 
 while true
     do
+        cp $program_dir/sc140.config $tmp #this is a line for debugging
+
         #lynx $active_dur/seamus-login.html -cmd_script=$active_dur/login.log > /dev/null &
 
-        touch /tmp/sc140/stillAlive
+        touch $alive
 
         #sleep 1
 
@@ -88,20 +93,22 @@ while true
         fi
 
 	sleep 1	
+        echo $sc_dir/sclang $program_dir/sctweet.scd $tmp/sc140.config $raspberry
 
-        $sc_dir/sclang $program_dir/sctweet.scd $raspberry $dur $min_dur $chars_per_line &
+        $sc_dir/sclang $program_dir/sctweet.scd $tmp/sc140.config $raspberry &
         pid=$!
         sleep 1
-        $program_dir/keepAlive.sh $pid &
+        cd $program_dir 
+        keepAlive.sh $pid &
         alive_pid=$!
         sleep 1
         wait $pid #wait for sclang to exit
         kill $alive_pid # this process no longer has the right pid for sclang
 
         # ok, did it die on a particular tweet?
-        if [ -f /tmp/sc140/playing ] 
+        if [ -f $playing ] 
             then
-                cat /tmp/sc140/playing >> /tmp/sc140/badtweets
+                cat $playing >> $badtweets
         fi
 
 	sleep 1

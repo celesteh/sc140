@@ -1,18 +1,11 @@
 (
-var fetch, de_dup, playnew, new_tweets, old_tweets, clear_vars, wait_time, fetcher, do_fetch, dur, rout, pyhton_script_path,
-busy, click, clicker, f_task, stop_tweet, fetch_click, monitor, fade_time, play, min_dur, bad_tweets;
-var tweet_mod_time;
+var fetch, de_dup, playnew, new_tweets, old_tweets, clear_vars, wait_time, fetcher, do_fetch, dur, rout, isRaspberry,
+busy, click, clicker, f_task, stop_tweet, fetch_click, monitor, fade_time, play, min_dur, bad_tweets, do_config, config;
+var tweet_mod_time, rss, playing_file, alive_file;
 var update_gui, tweet, window, chars_per_line;
 var semaphore;
 
-// how long to play the tweets
-dur = 90;
-// they need to play for at least this long to come back again in the loop
-min_dur = 5;
-// after how many chars do we wrap the diplay text?
-chars_per_line = 33;
-// don't forget to edit this file to have your auth codes
-pyhton_script_path = "/home/celesteh/Documents/code/sc140/sctweet.py";
+
 
 
 /*
@@ -35,24 +28,64 @@ s.options.memSize = s.options.memSize*8;
 fetcher = Semaphore.new;
 busy = Semaphore.new;
 
+
+// Get arguments , read config file
+do_config = {
+	var config_path, config_arr;
+
+	config = IdentityDictionary.new;
+
+	config_path = thisProcess.argv[0];
+	config_path.postln;
+
+	isRaspberry = (thisProcess.argv[1] == "1");
+
+	File.exists(config_path).if ({
+		config_arr = FileReader.read(config_path, true, true, delimiter: $=);
+		config_arr.do({|pair|
+			(pair.size == 2).if ({ // only get get pairs
+				config.put(pair[0].asSymbol, pair[1]);
+				pair.postln;
+			})
+		});
+	});
+
+	// how long to play the tweets
+	dur = config[\dur].asFloat;
+	// they need to play for at least this long to come back again in the loop
+	min_dur = config[\min_dur].asFloat;
+	// after how many chars do we wrap the diplay text?
+	chars_per_line = config[\chars_per_line].asInteger;
+
+	// get bad tweets
+	File.exists(config[\badtweets]). if ({
+		bad_tweets = FileReader.read(config[\badtweets], true, true);
+		bad_tweets.isNil.if ({
+			bad_tweets = [];
+			} , {
+				bad_tweets= bad_tweets.flat;
+		});
+	});
+
+	rss = config[\rss];
+	playing_file = config[\playing];
+	alive_file = config[\alive];
+
+};
+
+do_config.();
+
+
 fade_time = 45.reciprocal;
 
 click =  {
 	clicker = 2;
-	"touch /tmp/sc140/stillAlive".unixCmd;
+	"touch %".format(alive_file).unixCmd;
 };
 
 click.value;
 
-// get bad tweets
-File.exists("/tmp/sc140/badtweets"). if ({
-	bad_tweets = FileReader.read("/tmp/sc140/badtweets", true, true);
-	bad_tweets.isNil.if ({
-		bad_tweets = [];
-		} , {
-			bad_tweets= bad_tweets.flat;
-	});
-});
+
 
 
 // set up graphics
@@ -233,17 +266,17 @@ do_fetch = {|semaphore, niceness, action, first = false|
 			nice = ""
 	});
 
-	cmd = (nice ++ "python" + pyhton_script_path);
+	//cmd = (nice ++ "python" + pyhton_script_path);
 	//cmd.postln;
 
 	cmd_act = {
 
 		fetch_click = 2;
-		(File.mtime("/tmp/sc140/rss.xml") != tweet_mod_time).if({
-			tweet_mod_time = File.mtime("/tmp/sc140/rss.xml");
+		(File.mtime(rss) != tweet_mod_time).if({
+			tweet_mod_time = File.mtime(rss);
 			//waittime.wait;
 			//"done waiting".postln;
-			doc = DOMDocument.new("/tmp/sc140/rss.xml");
+			doc = DOMDocument.new(rss);
 			channel = doc.getElementsByTagName("channel");
 			nodes = channel.last.getChildNodes;
 			nodes.do({|node|
@@ -276,7 +309,7 @@ do_fetch = {|semaphore, niceness, action, first = false|
 	};
 
 	first.if({
-		File.exists("/tmp/sc140/rss.xml").if({
+		File.exists(rss).if({
 			tweet_mod_time = 0;
 			busy.wait;
 			cmd_act.fork;
@@ -433,7 +466,7 @@ play = { |item, should_move=false, semaphore|
 			//monitor for loudness
 
 			// make a note of what we're playing
-			"echo \"%\" > /tmp/sc140/playing".format(item.id).postln.unixCmd;
+			"echo \"%\" > %".format(item.id, playing_file).postln.unixCmd;
 
 
 			lastrms=Array.fill(min_dur, {1});
@@ -475,7 +508,7 @@ play = { |item, should_move=false, semaphore|
 		stop_tweet.value(item);
 
 		// remove note
-		"rm /tmp/sc140/playing".unixCmd;
+		"rm %".format(playing_file).unixCmd;
 
 		1.wait;
 		click.value;
