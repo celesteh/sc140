@@ -96,11 +96,14 @@ for term in search_terms:
 #http://twitter.com/statuses/user_timeline/132238223.rss
 #http://twitter.com/statuses/user_timeline/141261188.rss
 #http://twitter.com/statuses/user_timeline/141261188.rss
+
+
 user_ids = [27925249, 16041929, 27159398, 
 27215060, #headcube
 52702351, 25562932, 52894611, 15373817, 
 38290221,  #rukano
-141261188, 132238223, 1963517594, 454783594,
+141261188, #minkepatt
+132238223, 1963517594, 454783594,
 101565901, #AdamArmfield
 423810028, #aucotsi
 41965672, #joshpar
@@ -116,6 +119,8 @@ user_ids = [27925249, 16041929, 27159398,
 112783230, # j_liljedahl
 143715809, #tonetron
 16220116, #luuma
+1179486115, #CourtSociety
+116069873, #EliFieldsteel
 985545530 #nikkhilnani
 ]
 
