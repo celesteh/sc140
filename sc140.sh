@@ -93,11 +93,11 @@ while true
         #sleep 1
 
         killall scsynth
-        sleep 1
+        sleep 2
 
         if [ $raspberry -ne 0 ]
             then
-            	$sc_dir/scsynth -u 57110 &
+            	( $sc_dir/scsynth -u 57110 || sudo shutdown -r now ) &
         fi
 
 	sleep 1	
