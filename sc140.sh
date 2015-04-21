@@ -42,8 +42,9 @@ rm -rf $tmp
 # and start afresh
 mkdir $tmp
 # put the config file there so supercollider can find it
+cd $program_dir
 cp $program_dir/sc140.config $tmp
-cp $program_dir/rss.xml $tmp #start with a pre-downloaded set of tweets in case of network delay
+cp $data/rss.xml $rss #start with a pre-downloaded set of tweets in case of network delay
 
 # this program starts with a lot of sleeping, in case you put it in your startup items.
 
@@ -67,7 +68,9 @@ sleep 10
 sleep 1
 
 # ok, let's try getting new tweets every 5 minutes from now on, but make it nice so it doesn't disrupt the rest of the program
-( cd $program_dir ; sleep 60 ;  while true; do sleep 300; nice -n 10 python $program_dir/sctweet.py ;  done ) &
+niceness=10
+if [ $raspberry -ne 0] ; then niceness=19; fi # the nicest we can be
+( cd $program_dir ; sleep 60 ;  while true; do sleep 300; nice -n $niceness python $program_dir/sctweet.py ; mv $working_rss $rss done ) &
 
 source $program_dir/jack_script.sh 
 

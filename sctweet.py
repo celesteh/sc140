@@ -2,6 +2,9 @@ import tweepy
 import re
 import codecs
 
+
+###### get ready
+
 config = {}
  
 file_name = "sc140.config"
@@ -12,158 +15,58 @@ for line in config_file:
     if line and line[0] is not "#" and line[-1] is not "=":
         var,val = line.rsplit("=",1)
         config[var.strip()] = val.strip()
- 
+config_file.close()
 #print config
+
+# get oauth data
+oauth = {}
+file_name = '{}/oauth.dat'.format(config['data'])
+config_file = open(file_name)
+for line in config_file:
+    line = line.strip()
+    if line and line[0] is not "#" and line[-1] is not "=":
+        var,val = line.rsplit("=",1)
+        oauth[var.strip()] = val.strip()
+config_file.close()
 
 # Consumer keys and access tokens, used for OAuth
 # Get these from Twitter by registering as a developer
-consumer_key = config['consumer_key']
-consumer_secret = config['consumer_secret']
-access_token = config['access_token']
-access_token_secret = config['access_token_secret']
+consumer_key = oauth['consumer_key']
+consumer_secret = oauth['consumer_secret']
+access_token = oauth['access_token']
+access_token_secret = oauth['access_token_secret']
 
-rss_file = config['rss']
- 
-# OAuth process, using the keys and tokens
-auth = tweepy.auth.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_token_secret)
- 
-# Creation of the actual interface, using authentication
-api = tweepy.API(auth)
- 
-# Sample method, used to update a status
-#api.update_status('Python Hello World')
+#rss_file = config['rss']
+rss_file = config['working_rss']
 
-# Creates the user object. The me() method returns the user whose authentication keys were used.
-user = api.me()
- 
-print('Name: ' + user.name)
-print('Location: ' + user.location)
-print('Friends: ' + str(user.friends_count))
+# function to determine playability and to write the file
+
+rss = open(rss_file, 'w')
+rss.write('<?xml version="1.0" encoding="UTF-8" ?>\n<rss version="2.0">\n<channel>\n <title>Tweets</title>\n')
 
 
-#print(tweetlist)
+# stuff then into DOM file that's got ID, username, text and date
+string = ""
+
 
 unique_ids = []
-unique_tweets = []
-
-
-#for status in (tweetlist):
-    # Process the status here
-   #print (status.text)
-   #print (status.created_at)
-   #print (status.id)
-   #print (status.author.screen_name)
-
-#   unique_ids.append(status.id)
-#   unique_tweets.append(status)
-
-# end for
-
-# id of sc-tweeter list is 96598344
-tweetlist = []
-for status in tweepy.Cursor(api.list_timeline, list_id=96598344).items(200):
-    tweetlist.append(status)
-
-# my timeline
-timeline = []
-for status in tweepy.Cursor(api.home_timeline).items(100):
-    timeline.append(status)
-
-search_terms = ['#sctweet', '#sc140', '#supercollider', '#sc', 'SinOsc']
-
-# ok, so get also tweets tagged #sctweet #sc140 and #supercollider
-#sctweet = api.search(q='#sctweet',count=100)
-#sc140 =  api.search(q='#sc140',count=100)
-#supercollider =  api.search(q='#supercollider',count=100)
-
-found = []
-
-for term in search_terms:
-    #for page in range(1, 10):
-        for status in tweepy.Cursor(api.search, q=term, since_id=392004183454674945 ).items(200):
-            found.append(status)
-
-#user_ids = [27925249, 16041929, 27159398, 27215060, 52702351, 25562932, 52894611, 15373817, 38290221, 20926552,  141261188, 132238223, 1963517594]
-# hey, and let's get some known sc-tweeters
-#http://twitter.com/statuses/user_timeline/27925249.rss
-#http://twitter.com/statuses/user_timeline/16041929.rss
-#http://twitter.com/statuses/user_timeline/27159398.rss
-#http://twitter.com/statuses/user_timeline/27215060.rss
-#http://twitter.com/statuses/user_timeline/52702351.rss
-#http://twitter.com/statuses/user_timeline/25562932.rss
-#http://twitter.com/statuses/user_timeline/52894611.rss
-#http://twitter.com/statuses/user_timeline/15373817.rss
-#http://twitter.com/statuses/user_timeline/38290221.rss
-#http://twitter.com/statuses/user_timeline/20926552.rss
-#http://twitter.com/statuses/user_timeline/20926552.rss
-#http://twitter.com/statuses/user_timeline/141261188.rss
-#http://twitter.com/statuses/user_timeline/132238223.rss
-#http://twitter.com/statuses/user_timeline/141261188.rss
-#http://twitter.com/statuses/user_timeline/141261188.rss
-
-
-user_ids = [27925249, 16041929, 27159398, 
-27215060, #headcube
-52702351, 25562932, 52894611, 15373817, 
-38290221,  #rukano
-141261188, #minkepatt
-132238223, 1963517594, 454783594,
-101565901, #AdamArmfield
-423810028, #aucotsi
-41965672, #joshpar
-299572064, #Genki_ota
-214991651, #mmmayang
-247420409, #brunoruviaro
-18938683, #Schemawound
-58274583, #nankotsuteacher
-93944564, #KR9000_CW
-162389321, #cocorosh
-70455932, #44_kwm_20
-2281213501, #__DKH__
-112783230, # j_liljedahl
-143715809, #tonetron
-16220116, #luuma
-1179486115, #CourtSociety
-116069873, #EliFieldsteel
-58248824, #maeda_
-15947363, #capmikee
-252882286, #_yect
-19267573, #derekhowa
-422112204, #agnes_adler
-1883365904, #aminocomputer
-100932388, #Shihpin
-2349747720, #sluyterrific_sc
-14412186, #carltesta
-11128472, #pooneil
-985545530 #nikkhilnani
-]
-
-
-for tweeter in user_ids:
-    for status in tweepy.Cursor(api.user_timeline, user_id=tweeter, count=100).items(300):
-        found.append(status)
-      
-
-
-tweets = tweetlist  + found + timeline
-
-# filter out ones with naughty words
+unique_tweeters = []
 
 naughty_words = ['unixCmd', 'pipe', 'compile', 'interpret', 'PathName', 'runInTerminal', 'interpretPrint', 'systemCmd', 'prUnixCmd', 'file', 'File', 'UnixFile', 'delete', 'unixCmdInferPID', 'perform', 'preProcessor', 'executeFile', 'compileFile', 'SkipJack', 'exit', 'CmdPeriod']
 
 code_words = ['play|scope', '\(|\{', '\)|\}',]
 
 
-# sort them by id, so we only have unique ones
-tweet_id = 0
-safe = 1
-playable = 1
-#match RTs  RT\ @*?:
+def playable( status ):
+    "This determines if a tweet should be included in our output"
+    # sort them by id, so we only have unique ones
+    tweet_id = 0
+    safe = 1
+    playable = 0
+    #match RTs  RT\ @*?:
 
-stat = ""
+    stat = ""
 
-for status in (tweets):
     if status.retweeted :
         stat = status
         try:
@@ -173,7 +76,7 @@ for status in (tweets):
             pass
     else :
         if (re.search('\ART\W+\@\w+?:\W+', status.text) != None): #this looks like a retweet
-            continue 
+            return 0 
     tweet_id = status.id
     if tweet_id not in unique_ids:
         safe = 1
@@ -191,41 +94,84 @@ for status in (tweets):
                     break
             if playable == 1 :
                 unique_ids.append(status.id)
-                unique_tweets.append(status)
+                if status.author.id_str not in unique_tweeters:
+                    unique_tweeters.append(status.author.id_str)
+                    print (status.author.screen_name)
                 #print (status.text)
-                #print(status.author.screen_name)
+                #print(status.author.id_str)
+                string = unicode(' <item>\n  <title>{}</title>\n'+
+                '  <description>{}</description>\n'+
+                '  <guid>{}</guid>\n'+
+                '  <pubDate>{}</pubDate>\n'+
+                '  <author>{}</author>\n'+
+                ' </item>\n', 'utf-8', 'ignore').format(str(status.id), status.text, str(status.id), str(status.created_at), status.author.screen_name)
+                string = codecs.encode(string, 'utf-8', 'ignore')
+                rss.write(string)
         #endif safe
     #endif unique
-#endfor
-
-rss = open(rss_file, 'w')
-rss.write('<?xml version="1.0" encoding="UTF-8" ?>\n<rss version="2.0">\n<channel>\n <title>Tweets</title>\n')
+    return playable
+# enddef
 
 
-# stuff then into DOM file that's got ID, username, text and date
-string = ""
+########### log in and go
 
-for status in unique_tweets:
-    string = unicode(' <item>\n  <title>{}</title>\n'+
-    '  <description>{}</description>\n'+
-    '  <guid>{}</guid>\n'+
-    '  <pubDate>{}</pubDate>\n'+
-    '  <author>{}</author>\n'+
-    ' </item>\n', 'utf-8', 'ignore').format(str(status.id), status.text, str(status.id), str(status.created_at), status.author.screen_name)
-    string = codecs.encode(string, 'utf-8', 'ignore')
-    #string = str(string)
-    #string = str((' <item>\n  <title>', status.author.screen_name, '</title>\n',
-    #'  <description>', status.text,'</description>\n',
-    #'  <guid>', status.id, '</guid>\n',
-    #'  <pubDate>', status.created_at, '</pubDate>\n',
-    #'  <author>', status.author.screen_name, '</author>\n',
-    #' </item>\n'))
-    #print(string)
-    rss.write(string)
-#endfor
+ 
+# OAuth process, using the keys and tokens
+auth = tweepy.auth.OAuthHandler(consumer_key, consumer_secret)
+auth.set_access_token(access_token, access_token_secret)
+ 
+# Creation of the actual interface, using authentication
+api = tweepy.API(auth)
+ 
+# Sample method, used to update a status
+#api.update_status('Python Hello World')
 
+# Creates the user object. The me() method returns the user whose authentication keys were used.
+me = api.me()
+ 
+print('Name: ' + me.name)
+print('Location: ' + me.location)
+print('Friends: ' + str(me.friends_count))
+
+
+
+
+search_terms = ['#sctweet', '#sc140', '#supercollider', '#sc', 'SinOsc', 'Pbind']
+
+# ok, so get also tweets tagged #sctweet #sc140 and #supercollider
+#sctweet = api.search(q='#sctweet',count=100)
+#sc140 =  api.search(q='#sc140',count=100)
+#supercollider =  api.search(q='#supercollider',count=100)
+
+
+for term in search_terms:
+    #for page in range(1, 10):
+        for status in tweepy.Cursor(api.search, q=term).items(200):
+            playable(status)
+
+#for tweeter in user_ids:
+user_ids = []
+for tweeter in api.friends_ids(user_id=me.id_str):
+    user_ids.append(tweeter)
+
+    for status in tweepy.Cursor(api.user_timeline, user_id=tweeter, count=100).items(300):
+        playable(status)
+
+# ok, close the file
 rss.write('</channel>\n</rss>')
+rss.close;
+
+# let's make sure we're following everyone
+for user in unique_tweeters:
+    if user not in user_ids:
+        #add as friend
+        api.create_friendship(user_id=user, follow=1)
+    #endif
+#endfor 
+
+
+
 
 print ('done')
 
-# return the newest one if it's being added or a random one if its old
+
