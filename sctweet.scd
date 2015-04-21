@@ -224,6 +224,7 @@ update_gui = {|code, author, gui_fade_time = 0.2|
 							return_val = gui_fade_time;
 
 							(count > steps).if({
+							tweet.stringColor = Color.green;
 								//state = 0;
 								return_val = nil
 							}); // done
