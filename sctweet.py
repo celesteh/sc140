@@ -165,7 +165,11 @@ rss.close;
 for user in unique_tweeters:
     if user not in user_ids:
         #add as friend
-        api.create_friendship(user_id=user, follow=1)
+        #api.create_friendship(user_id=user, follow=1)
+        # this isn't working for some reason
+        #print (user)
+        if not api.exists_friendship(user_a=me.id_str, user_b=user) :
+            api.create_friendship(user_id=user, follow=1)
     #endif
 #endfor 
 

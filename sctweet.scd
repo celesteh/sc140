@@ -31,14 +31,20 @@ busy = Semaphore.new;
 
 // Get arguments , read config file
 do_config = {
-	var config_path, config_arr;
+	var config_path, config_arr, server_port;
+
+	server_port = thisProcess.argv[0];
 
 	config = IdentityDictionary.new;
 
-	config_path = thisProcess.argv[0];
+	config_path = thisProcess.argv[1];
 	config_path.postln;
 
-	isRaspberry = (thisProcess.argv[1] == "1");
+	isRaspberry = (thisProcess.argv[2] == "1");
+
+	if ((isRaspberry) && (server_port != 0) , {
+		Server.default = Server(\Raspberry, NetAddr("localhost", server_port));
+	});
 
 	File.exists(config_path).if ({
 		config_arr = FileReader.read(config_path, true, true, delimiter: $=);

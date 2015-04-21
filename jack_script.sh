@@ -44,7 +44,7 @@ if aplay -l | grep -qi ultra
         then
     	    ( jackd  -d alsa -d hw:Ultra -r 44100 || sudo shutdown -r now ) &
     fi
-    if [ !  -f /etc/rpi-issue  ]
+    if [ $raspberry -eq 0 ]
         then
             jackd  -d alsa -d hw:Ultra -r 44100 &
    fi

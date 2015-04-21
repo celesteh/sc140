@@ -19,6 +19,9 @@ if [ -e /usr/local/bin/sclang ]
         sc_dir=/usr/bin
 fi
 
+port=0
+server=0
+
 #are we on a raspberry pi
 if [ -f /etc/rpi-issue ]
     then
@@ -29,7 +32,9 @@ if [ -f /etc/rpi-issue ]
         #    then
         #        sudo dd if=/dev/zero of=/swapfile bs=1MB count=512 && sudo mkswap /swapfile
         #fi
-        #sudo swapon /swapfile        
+        #sudo swapon /swapfile   
+
+        port=$default_port     
 
     else
         raspberry=0
@@ -99,13 +104,35 @@ while true
 
         if [ $raspberry -ne 0 ]
             then
-            	( $sc_dir/scsynth -u 57110 || ( sleep 1; killall scsynth; sleep 5; $sc_dir/scsynth -u 57110 || sudo shutdown -r now ) ) & # try to reboot less often
+                
+            	$sc_dir/scsynth -u $port &
+                server=$!
+                sleep 1
+                # is the server running?
+                if kill -0 $server  2> /dev/null
+                    then
+                        #all good
+                    else
+                        # try again
+                        port=$(( $port + 1 ))
+
+                	$sc_dir/scsynth -u $port &
+                    server=$!
+                    sleep 1
+                    # is the server running?
+                    if kill -0 $server  2> /dev/null
+                        then
+                            #all good
+                        else
+                            sudo shutdown -r now
+                    fi
+                fi
         fi
 
-	sleep 1	
-        echo $sc_dir/sclang $program_dir/sctweet.scd $tmp/sc140.config $raspberry
+	    sleep 1	
+        #echo $sc_dir/sclang $program_dir/sctweet.scd $tmp/sc140.config $raspberry
 
-        $sc_dir/sclang $program_dir/sctweet.scd $tmp/sc140.config $raspberry &
+        $sc_dir/sclang $program_dir/sctweet.scd $port $tmp/sc140.config $raspberry &
         pid=$!
         sleep 1
         cd $program_dir 
@@ -131,6 +158,17 @@ while true
 	sleep 1
         killall scsynth
         killall jackd
+        # do we know the server's pid?
+        if [ $server -ne 0 ]
+            then
+                kill $server
+                sleep 1
+                # is the server running?
+                if kill -0 $1  2> /dev/null
+                    then
+                        kill-9 $server
+                fi
+        fi
 
     if [ $raspberry -ne 0 ]
         then
