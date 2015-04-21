@@ -141,7 +141,7 @@ AppClock.sched(0, {
 });
 
 
-update_gui = {|code, author|
+update_gui = {|code, author, gui_fade_time = 0.2|
 	var colour, steps, count, state, reformat, formatted;
 
 	// break up the tweets after a set number of chars
@@ -176,7 +176,7 @@ update_gui = {|code, author|
 	};
 
 
-	steps = fade_time.reciprocal;
+	steps = gui_fade_time.reciprocal;
 	count =steps;
 	state = 0;
 
@@ -196,7 +196,7 @@ update_gui = {|code, author|
 				colour = Color.green(count.linlin(0, steps, 0, 1));
 				tweet.stringColor = colour;
 				count = count -1;
-				return_val = fade_time;
+				return_val = gui_fade_time;
 
 				(count < 0).if({state = 1;}); // time to move on
 			} , {
@@ -221,7 +221,7 @@ update_gui = {|code, author|
 							colour = Color.green(count.linlin(1, steps, 0, 1));
 							tweet.stringColor = colour;
 							count = count +1;
-							return_val = fade_time;
+							return_val = gui_fade_time;
 
 							(count > steps).if({
 								state = 0;
@@ -454,7 +454,9 @@ play = { |item, should_move=false, semaphore|
 
 			item.code.postln;
 
-			update_gui.(item.code, item.author);
+			//gui_fade_time = Server.local.avgCPU / 9; // higher load, fewer steps
+
+			update_gui.(item.code, item.author, Server.local.avgCPU / 9);
 
 			//should_move.if({
 			//	semaphore.wait;
@@ -483,9 +485,10 @@ play = { |item, should_move=false, semaphore|
 
 
 
-			(dur-10).wait;
-			update_gui.();
-			10.wait;
+			//(dur-10).wait;
+			//update_gui.();
+			//10.wait;
+			dur.wait;
 
 			endTime = Date.getDate;
 			syn.free;

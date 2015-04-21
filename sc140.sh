@@ -103,7 +103,7 @@ while true
         alive_pid=$!
 
         #at the risk of getting silly
-        $program_dir/keepAliveAlive $alive_pid $pid &
+        $program_dir/keepAliveAlive.sh $alive_pid $pid &
         # it will die on its own within a minute of keepAlive dying
 
         wait $pid #wait for sclang to exit
