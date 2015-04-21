@@ -120,7 +120,7 @@ while true
         killall scsynth
         killall jackd
 
-    if [ $raspberry ne 0 ]
+    if [ $raspberry -ne 0 ]
         then
             killall qjackctl.real # things that have spun out of control    	
     fi

@@ -5,8 +5,11 @@
 
 if [ -f /etc/rpi-issue ]
     then
+        raspberry=1
         export SC_JACK_DEFAULT_INPUTS="system"
         export SC_JACK_DEFAULT_OUTPUTS="system"
+    else
+        raspberry=0
 fi
 
 #pulseaudio --kill
@@ -37,7 +40,7 @@ if aplay -l | grep -qi ultra
 	#done	
 
 	#start jack
-    if [ -f /etc/rpi-issue ]
+    if [ $raspberry -ne 0 ]
         then
     	    ( jackd  -d alsa -d hw:Ultra -r 44100 || sudo shutdown -r now ) &
     fi
@@ -48,13 +51,13 @@ if aplay -l | grep -qi ultra
   else
 	#start jack with default hardware
 	#jackd  -d alsa -d hw:0 -r 44100 &
-    if [ -f /etc/rpi-issue ]
+    if [ $raspberry -ne 0 ]
         then
-            amixer cset numid=3 1
-            sleep 1
+            #amixer cset numid=3 1
+            #sleep 1
             ( jackd -p 32 -d alsa -d hw:0,0 -r 44100 -p 1024 -n3  -s || sudo shutdown -r now ) &
     fi
-    if [ !  -f /etc/rpi-issue  ]
+    if [ $raspberry -eq 0  ]
         then
         	jackd -p32 -dalsa -dhw:0,0 -p1024 -n3 -s &
     fi
@@ -63,7 +66,10 @@ fi
 sleep 2
 
 # jack control
-qjackctl &
+if [ $raspberry -ne 0 ]
+    then
+        qjackctl &
+fi
 
 sleep 1
 
