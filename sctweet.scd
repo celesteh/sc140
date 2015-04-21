@@ -192,7 +192,7 @@ update_gui = {|code, author, gui_fade_time = 0.2|
 
 		(state == 0).if ( // fade in
 			{
-				(tweet.string == "").if ({ state = 1 }); // if there's nothing to fade, don't bother
+				//(tweet.string == "").if ({ state = 1 }); // if there's nothing to fade, don't bother
 				colour = Color.green(count.linlin(0, steps, 0, 1));
 				tweet.stringColor = colour;
 				count = count -1;
@@ -212,22 +212,22 @@ update_gui = {|code, author, gui_fade_time = 0.2|
 							} , {
 								tweet.string = "";
 								tweet.stringColor = Color.black;
-								return_val = nil;
+								//return_val = nil;
 						});
 
 					},{ // fade back in
 						//state.postln;
-						(tweet.string == "").if ({ return_val = nil; state = 1; tweet.stringColor = Color.black;} , {// if there's nothing to fade, don't bother
+						//(tweet.string == "").if ({ return_val = nil; state = 1; tweet.stringColor = Color.black;} , {// if there's nothing to fade, don't bother
 							colour = Color.green(count.linlin(1, steps, 0, 1));
 							tweet.stringColor = colour;
 							count = count +1;
 							return_val = gui_fade_time;
 
 							(count > steps).if({
-								state = 0;
+								//state = 0;
 								return_val = nil
 							}); // done
-						});
+						//});
 
 				})
 			}
