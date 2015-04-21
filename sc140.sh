@@ -112,6 +112,7 @@ while true
                 if kill -0 $server  2> /dev/null
                     then
                         #all good
+                        echo "started"
                     else
                         # try again
                         port=$(( $port + 1 ))
@@ -123,6 +124,7 @@ while true
                     if kill -0 $server  2> /dev/null
                         then
                             #all good
+                            echo "started"
                         else
                             sudo shutdown -r now
                     fi
