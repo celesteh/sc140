@@ -96,7 +96,7 @@ def playable( status ):
                 unique_ids.append(status.id)
                 if status.author.id_str not in unique_tweeters:
                     unique_tweeters.append(status.author.id_str)
-                    print (status.author.screen_name)
+                    #print (status.author.screen_name)
                 #print (status.text)
                 #print(status.author.id_str)
                 string = unicode(' <item>\n  <title>{}</title>\n'+

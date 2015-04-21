@@ -99,7 +99,7 @@ while true
 
         if [ $raspberry -ne 0 ]
             then
-            	( $sc_dir/scsynth -u 57110 || sudo shutdown -r now ) &
+            	( $sc_dir/scsynth -u 57110 || ( sleep 1; killall scsynth; sleep 5; $sc_dir/scsynth -u 57110 || sudo shutdown -r now ) ) & # try to reboot less often
         fi
 
 	sleep 1	
