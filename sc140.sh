@@ -105,6 +105,7 @@ while true
         #at the risk of getting silly
         $program_dir/keepAliveAlive.sh $alive_pid $pid &
         # it will die on its own within a minute of keepAlive dying
+        #( wait $alive_pid ; kill $pid ) &
 
         wait $pid #wait for sclang to exit
         kill $alive_pid # this process no longer has the right pid for sclang
@@ -117,13 +118,14 @@ while true
 
 	sleep 1
         killall scsynth
+        killall jackd
 
-    #if [ $raspberry ne 0 ]
-    #    then
-        	killall jackd
-    #fi
+    if [ $raspberry ne 0 ]
+        then
+            killall qjackctl.real # things that have spun out of control    	
+    fi
 
-	sleep 1
+	sleep 2
 	$program_dir/jack_script.sh 
 	sleep 1
 done
