@@ -75,6 +75,8 @@ if [ $raspberry -eq 0]
     else
         # the pi can get them between playing them
         ( sleep 60; sleep $tweet_interval; touch $should_fetch ) &
+        #also let's pre-copy over some tweets that ALWAYS crash the pi
+        cp $data/badtweets $badtweets
 fi
 
 source $program_dir/jack_script.sh 
