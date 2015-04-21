@@ -435,6 +435,9 @@ play = { |item, should_move=false, semaphore|
 
 		syn = Synth(\stereoListenForSilence,  nil, RootNode(s), \addToTail);
 
+		// make a note of what we're playing
+		"echo \"%\" > %".format(item.id, playing_file).postln.unixCmd;
+
 		play = item.play;
 
 		//"playable".postln;
@@ -467,10 +470,6 @@ play = { |item, should_move=false, semaphore|
 
 
 			//monitor for loudness
-
-			// make a note of what we're playing
-			"echo \"%\" > %".format(item.id, playing_file).postln.unixCmd;
-
 
 			lastrms=Array.fill(min_dur, {1});
 			osc_listener = OSCFunc({ |msg|
