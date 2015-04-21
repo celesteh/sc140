@@ -25,7 +25,7 @@ access_token_secret = config['access_token_secret']
 rss_file = config['rss']
  
 # OAuth process, using the keys and tokens
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+auth = tweepy.auth.OAuthHandler(consumer_key, consumer_secret)
 auth.set_access_token(access_token, access_token_secret)
  
 # Creation of the actual interface, using authentication
@@ -61,10 +61,14 @@ unique_tweets = []
 # end for
 
 # id of sc-tweeter list is 96598344
-tweetlist = api.list_timeline(list_id=96598344, count=200)
+tweetlist = []
+for status in tweepy.Cursor(api.list_timeline, list_id=96598344).items(200):
+    tweetlist.append(status)
 
 # my timeline
-timeline = api.home_timeline(count=100)
+timeline = []
+for status in tweepy.Cursor(api.home_timeline).items(100):
+    timeline.append(status)
 
 search_terms = ['#sctweet', '#sc140', '#supercollider', '#sc', 'SinOsc']
 
@@ -76,8 +80,9 @@ search_terms = ['#sctweet', '#sc140', '#supercollider', '#sc', 'SinOsc']
 found = []
 
 for term in search_terms:
-    for status in tweepy.Cursor(api.search,q=term,rpp=60).items(600):
-        found.append(status)
+    #for page in range(1, 10):
+        for status in tweepy.Cursor(api.search, q=term, since_id=392004183454674945 ).items(200):
+            found.append(status)
 
 #user_ids = [27925249, 16041929, 27159398, 27215060, 52702351, 25562932, 52894611, 15373817, 38290221, 20926552,  141261188, 132238223, 1963517594]
 # hey, and let's get some known sc-tweeters
@@ -121,12 +126,23 @@ user_ids = [27925249, 16041929, 27159398,
 16220116, #luuma
 1179486115, #CourtSociety
 116069873, #EliFieldsteel
+58248824, #maeda_
+15947363, #capmikee
+252882286, #_yect
+19267573, #derekhowa
+422112204, #agnes_adler
+1883365904, #aminocomputer
+100932388, #Shihpin
+2349747720, #sluyterrific_sc
+14412186, #carltesta
+11128472, #pooneil
 985545530 #nikkhilnani
 ]
 
 
 for tweeter in user_ids:
-    found.extend(api.user_timeline(user_id=tweeter, count=60))
+    for status in tweepy.Cursor(api.user_timeline, user_id=tweeter, count=100).items(300):
+        found.append(status)
       
 
 

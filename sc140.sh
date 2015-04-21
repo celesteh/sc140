@@ -99,9 +99,13 @@ while true
         pid=$!
         sleep 1
         cd $program_dir 
-        keepAlive.sh $pid &
+        $program_dir/keepAlive.sh $pid &
         alive_pid=$!
-        sleep 1
+
+        #at the risk of getting silly
+        $program_dir/keepAliveAlive $alive_pid $pid &
+        # it will die on its own within a minute of keepAlive dying
+
         wait $pid #wait for sclang to exit
         kill $alive_pid # this process no longer has the right pid for sclang
 

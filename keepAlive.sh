@@ -2,9 +2,11 @@
 
 . sc140.config
 
+sleep_time=60
+
 rm $alive
 
-sleep 60
+sleep $sleep_time
 
 while true
     do
@@ -19,7 +21,8 @@ while true
             rm $alive
         fi
 
-        sleep 300
-
+        sleep $sleep_time
+        sleep_time=300
+        # the first trip through the loop is fast to catch start-up errors
 
 done
