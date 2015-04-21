@@ -460,7 +460,7 @@ play = { |item, should_move=false, semaphore|
 
 			//gui_fade_time = Server.local.avgCPU / 9; // higher load, fewer steps
 
-			update_gui.(item.code, item.author, Server.local.avgCPU / 9);
+			update_gui.(item.code, item.author, ((100 - Server.local.avgCPU) / 2.2).reciprocal);
 
 			//should_move.if({
 			//	semaphore.wait;
