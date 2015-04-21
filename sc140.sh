@@ -68,9 +68,14 @@ sleep 10
 sleep 1
 
 # ok, let's try getting new tweets every 5 minutes from now on, but make it nice so it doesn't disrupt the rest of the program
-niceness=10
-if [ $raspberry -ne 0] ; then niceness=19; fi # the nicest we can be
-( cd $program_dir ; sleep 60 ;  while true; do sleep 300; nice -n $niceness python $program_dir/sctweet.py ; mv $working_rss $rss ; done ) &
+
+if [ $raspberry -eq 0] 
+    then 
+        ( cd $program_dir ; sleep 60 ;  while true; do sleep $tweet_interval; nice -n $niceness python $program_dir/sctweet.py ; mv $working_rss $rss ; done ) &
+    else
+        # the pi can get them between playing them
+        ( sleep 60; sleep $tweet_interval; touch $should_fetch ) &
+fi
 
 source $program_dir/jack_script.sh 
 
@@ -119,6 +124,8 @@ while true
                 cat $playing >> $badtweets
         fi
 
+    
+    (
 	sleep 1
         killall scsynth
         killall jackd
@@ -127,8 +134,18 @@ while true
         then
             killall qjackctl.real # things that have spun out of control    	
     fi
+    ) &
 
-	sleep 2
+     if [ -e $should_fetch ]
+        then
+            rm $should_fetch
+            nice -n -20 python $program_dir/sctweet.py  #get it done ASAP
+            mv $working_rss $rss 
+            ( sleep $tweet_interval ; touch $should_fetch ) &
+        else
+        	sleep 3 #let jack settle
+    fi
+
 	$program_dir/jack_script.sh 
 	sleep 1
 done
