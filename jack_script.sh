@@ -66,7 +66,7 @@ fi
 sleep 2
 
 # jack control
-if [ $raspberry -ne 0 ]
+if [ $raspberry -eq 0 ]
     then
         qjackctl &
 fi
