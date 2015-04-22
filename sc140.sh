@@ -35,8 +35,6 @@ if [ -f /etc/rpi-issue ]
         #sudo swapon /swapfile   
 
         port=$default_port   
-        #also let's pre-copy over some tweets that ALWAYS crash the pi
-        cp $data/badtweets $badtweets
   
 
     else
@@ -77,8 +75,14 @@ sleep 1
 
 # ok, let's try getting new tweets every 5 minutes from now on, but make it nice so it doesn't disrupt the rest of the program
 
-#if [ $raspberry -eq 0 ] 
-#    then 
+if [ $raspberry -eq 0 ] 
+    then 
+
+         #also let's pre-copy over some tweets that ALWAYS crash the pi
+       cd $program_dir
+        cp $data/badtweets $badtweets
+fi
+
         ( cd $program_dir ; sleep 60 ;  while true; do sleep $tweet_interval; nice -n $niceness python $program_dir/sctweet.py && mv $working_rss $rss ; done ) &
 #    else
 #        # the pi can get them between playing them
