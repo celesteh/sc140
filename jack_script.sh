@@ -55,7 +55,9 @@ if aplay -l | grep -qi ultra
         then
             #amixer cset numid=3 1
             #sleep 1
-            ( jackd -p 32 -d alsa -d hw:0,0 -r 44100 -p 1024 -n3  -s || sudo shutdown -r now ) &
+            killall jackd
+            sleep 5
+            ( jackd -p 32 -d alsa -d hw:0,0 -r 44100 -p 1024 -n3  -s || ( killall jackd ; sleep 10 ; jackd -p 32 -d alsa -d hw:0,0 -r 44100 -p 1024 -n3  -s || sudo shutdown -r now )) &
     fi
     if [ $raspberry -eq 0  ]
         then

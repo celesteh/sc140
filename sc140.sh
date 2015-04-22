@@ -119,19 +119,19 @@ while true
                     else
                         # try again
                         port=$(( $port + 1 ))
-
-                	$sc_dir/scsynth -u $port &
-                    server=$!
-                    sleep 1
-                    # is the server running?
-                    if kill -0 $server  2> /dev/null
-                        then
-                            #all good
-                            echo "started"
-                        else
-                            #sudo shutdown -r now
-                            die "fail"
-                    fi
+                        sleep 5
+                	    $sc_dir/scsynth -u $port &
+                        server=$!
+                        sleep 1
+                        # is the server running?
+                        if kill -0 $server  2> /dev/null
+                            then
+                                #all good
+                                echo "started"
+                            else
+                                #sudo shutdown -r now
+                                die "fail"
+                        fi  
                 fi
         fi
 
