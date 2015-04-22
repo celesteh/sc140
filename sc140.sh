@@ -164,7 +164,7 @@ while true
         fi
 
     
-    (
+    
 	sleep 1
         killall scsynth
         killall jackd
@@ -183,8 +183,9 @@ while true
     if [ $raspberry -ne 0 ]
         then
             killall qjackctl.real # things that have spun out of control    	
+            sleep 10
     fi
-    ) &
+    
 
 #     if [ -e $should_fetch ]
 #        then
