@@ -13,7 +13,7 @@ server=$3
         # OR
         # the server is also running           
         
-    while [[ kill -0 $keepAlive  2> /dev/null ]] &&  ( [[ $server -eq 0 ]] || [[ kill -0 $server  2> /dev/null ]] )
+    while ( kill -0 $keepAlive  2> /dev/null )  &&  ( [[ $server -eq 0 ]] ||  kill -0 $server  2> /dev/null  )
                 do
                     sleep 60
                     #echo "keptAlive"
