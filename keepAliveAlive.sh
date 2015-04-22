@@ -2,9 +2,9 @@
 
 . sc140.config
 
-$keepAlive = $1
-$sclang = $2
-$server = $3
+keepAlive=$1
+sclang=$2
+server=$3
 
  # while:
     # keep alive is running 
