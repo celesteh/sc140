@@ -137,6 +137,15 @@ while true
                                 exit 1
                         fi  
                 fi
+                sleep 5
+                # is the server still running?
+                if kill -0 $server  2> /dev/null
+                    then
+                        #all good
+                        echo "still going"
+                    else
+                        sudo shutdown -r now
+                fi
         fi
 
 	    sleep 1	
