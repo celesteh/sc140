@@ -111,7 +111,6 @@ while true
                 
             	$sc_dir/scsynth -u $port &
                 server=$!
-                port=$(( $port + 1 ))
                 sleep 1
                 # is the server running?
                 if kill -0 $server  2> /dev/null
@@ -122,9 +121,10 @@ while true
                         # try again
                         
                         sleep 5
+                        port=$(( $port + 1 ))                        
                 	    $sc_dir/scsynth -u $port &
                         server=$!
-                        port=$(( $port + 1 ))
+                        
                         sleep 1
                         # is the server running?
                         if kill -0 $server  2> /dev/null
@@ -184,6 +184,7 @@ while true
 
     if [ $raspberry -ne 0 ]
         then
+            port=$(( $port + 1 ))
             killall qjackctl.real # things that have spun out of control    	
             sleep 10
     fi
