@@ -34,7 +34,10 @@ if [ -f /etc/rpi-issue ]
         #fi
         #sudo swapon /swapfile   
 
-        port=$default_port     
+        port=$default_port   
+        #also let's pre-copy over some tweets that ALWAYS crash the pi
+        cp $data/badtweets $badtweets
+  
 
     else
         raspberry=0
@@ -74,15 +77,15 @@ sleep 1
 
 # ok, let's try getting new tweets every 5 minutes from now on, but make it nice so it doesn't disrupt the rest of the program
 
-if [ $raspberry -eq 0 ] 
-    then 
+#if [ $raspberry -eq 0 ] 
+#    then 
         ( cd $program_dir ; sleep 60 ;  while true; do sleep $tweet_interval; nice -n $niceness python $program_dir/sctweet.py && mv $working_rss $rss ; done ) &
-    else
-        # the pi can get them between playing them
-        ( sleep 60; sleep $tweet_interval; touch $should_fetch ) &
-        #also let's pre-copy over some tweets that ALWAYS crash the pi
-        cp $data/badtweets $badtweets
-fi
+#    else
+#        # the pi can get them between playing them
+#        ( sleep 60; sleep $tweet_interval; touch $should_fetch ) &
+#        #also let's pre-copy over some tweets that ALWAYS crash the pi
+#        cp $data/badtweets $badtweets
+#fi
 
 source $program_dir/jack_script.sh 
 
@@ -179,14 +182,14 @@ while true
     fi
     ) &
 
-     if [ -e $should_fetch ]
-        then
-            rm $should_fetch
-            nice -n -20 python $program_dir/sctweet.py && mv $working_rss $rss # do it asap
-            ( sleep $tweet_interval ; touch $should_fetch ) &
-        else
+#     if [ -e $should_fetch ]
+#        then
+#            rm $should_fetch
+#            nice -n -20 python $program_dir/sctweet.py && mv $working_rss $rss # do it asap
+#            ( sleep $tweet_interval ; touch $should_fetch ) &
+#        else
         	sleep 3 #let jack settle
-    fi
+#    fi
 
 	$program_dir/jack_script.sh 
 	sleep 1
