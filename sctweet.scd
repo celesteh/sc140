@@ -42,8 +42,8 @@ do_config = {
 
 	isRaspberry = (thisProcess.argv[2] == "1");
 
-	if ((isRaspberry) && (server_port != 0) , {
-		Server.default = Server(\Raspberry, NetAddr("localhost", server_port));
+	if ((isRaspberry) && (server_port != "0") , {
+		Server.default = Server(\Raspberry, NetAddr("localhost", server_port.asInteger));
 	});
 
 	File.exists(config_path).if ({

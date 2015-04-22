@@ -74,7 +74,7 @@ sleep 1
 
 # ok, let's try getting new tweets every 5 minutes from now on, but make it nice so it doesn't disrupt the rest of the program
 
-if [ $raspberry -eq 0] 
+if [ $raspberry -eq 0 ] 
     then 
         ( cd $program_dir ; sleep 60 ;  while true; do sleep $tweet_interval; nice -n $niceness python $program_dir/sctweet.py && mv $working_rss $rss ; done ) &
     else
@@ -126,7 +126,8 @@ while true
                             #all good
                             echo "started"
                         else
-                            sudo shutdown -r now
+                            #sudo shutdown -r now
+                            die "fail"
                     fi
                 fi
         fi
