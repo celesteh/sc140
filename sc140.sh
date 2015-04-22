@@ -178,7 +178,7 @@ while true
                 # is the server running?
                 if kill -0 $1  2> /dev/null
                     then
-                        kill-9 $server
+                        kill -9 $server
                 fi
         fi
 

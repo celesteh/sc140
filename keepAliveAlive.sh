@@ -23,8 +23,8 @@ server=$3
     echo "keepAlive (or the server) is dead"
     kill $sclang
 
-    if [[ $server -ne 0 ]]
-        then
-            kill $server
-        fi
+    #if [[ $server -ne 0 ]]
+    #    then
+    #        kill $server
+    #    fi
         
