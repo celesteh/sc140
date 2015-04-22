@@ -186,7 +186,7 @@ while true
         then
             port=$(( $port + 1 ))
             killall qjackctl.real # things that have spun out of control    	
-            sleep 10
+            sleep 20
     fi
     
 
