@@ -1,0 +1,4 @@
+[Desktop Entry]
+Name=SC140
+Exec=/home/pi/sc140/sc140.sh
+Type=application
