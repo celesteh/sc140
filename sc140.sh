@@ -134,7 +134,8 @@ while true
                                 echo "started"
                             else
                                 #sudo shutdown -r now
-                                die "fail"
+                                echo "fail"
+                                exit 1
                         fi  
                 fi
         fi
@@ -142,7 +143,7 @@ while true
 	    sleep 1	
         #echo $sc_dir/sclang $program_dir/sctweet.scd $tmp/sc140.config $raspberry
 
-        $sc_dir/sclang $program_dir/sctweet.scd $port $tmp/sc140.config $raspberry &
+        $sc_dir/sclang $program_dir/sctweet.scd $port $program_dir/sc140.config $raspberry &
         pid=$!
         sleep 1
         cd $program_dir 
@@ -150,12 +151,14 @@ while true
         alive_pid=$!
 
         #at the risk of getting silly
-        $program_dir/keepAliveAlive.sh $alive_pid $pid &
+        $program_dir/keepAliveAlive.sh $alive_pid $pid $server &
+        aliveAlive_pid=$!
         # it will die on its own within a minute of keepAlive dying
         #( wait $alive_pid ; kill $pid ) &
 
         wait $pid #wait for sclang to exit
         kill $alive_pid # this process no longer has the right pid for sclang
+        kill $aliveAlive # it's won't live long on its own, but there's too much clutter
 
         # ok, did it die on a particular tweet?
         if [ -f $playing ] 
