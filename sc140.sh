@@ -47,9 +47,7 @@ rm -rf $tmp
 
 # and start afresh
 mkdir $tmp
-# put the config file there so supercollider can find it
 cd $program_dir
-cp $program_dir/sc140.config $tmp
 cp $data/rss.xml $rss #start with a pre-downloaded set of tweets in case of network delay
 
 # this program starts with a lot of sleeping, in case you put it in your startup items.
@@ -98,8 +96,7 @@ sleep 2
 
 while true
     do
-        cp $program_dir/sc140.config $tmp #this is a line for debugging
-
+ 
         #lynx $active_dur/seamus-login.html -cmd_script=$active_dur/login.log > /dev/null &
 
         touch $alive
@@ -114,6 +111,7 @@ while true
                 
             	$sc_dir/scsynth -u $port &
                 server=$!
+                port=$(( $port + 1 ))
                 sleep 1
                 # is the server running?
                 if kill -0 $server  2> /dev/null
@@ -122,10 +120,11 @@ while true
                         echo "started"
                     else
                         # try again
-                        port=$(( $port + 1 ))
+                        
                         sleep 5
                 	    $sc_dir/scsynth -u $port &
                         server=$!
+                        port=$(( $port + 1 ))
                         sleep 1
                         # is the server running?
                         if kill -0 $server  2> /dev/null
