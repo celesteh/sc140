@@ -3,7 +3,7 @@ sc140
 
 Download and play SuperCollider Tweets
 
-This requires SuperCollider, the XML SuperCollider Quark, Python. The tweepy python lib, Bash and may require lynx. It has been tested on Ubuntu studio and Raspbian and should run on OS X with minimal modification.
+This requires SuperCollider, the XML SuperCollider Quark, Python. The tweepy python lib, Bash and may require lynx (see lynx-readme.md). It has been tested on Ubuntu studio and Raspbian and should run on OS X with minimal modification.
 
 You will need to register as an app developer with Twitter in order to get API keys.
 I recommend creating a twitter account specififcally for this program and following everyone currently followed by [@sc140Bot] (https://twitter.com/sc140Bot)

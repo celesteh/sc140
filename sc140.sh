@@ -61,6 +61,18 @@ sleep 20
 # I chose to make a local copy of the login html page, rather than try to replay
 # the redirection thing that webpages do with this sort of login
 
+if [ need_lynx -ne 0 ]
+    then
+        if [ $timeout -eq 0 ]
+            then
+                # do it once
+                lynx $lynx_url -cmd_script=$lynx_log > /dev/null &
+            else
+                # do it when we time out
+                (while true; do lynx $lynx_url -cmd_script=$lynx_log > /dev/null & sleep $timeout ; done )&
+        fi
+fi
+
 #lynx $active_dur/seamus-login.html -cmd_script=$active_dur/login.log > /dev/null &
 
 sleep 10
@@ -78,7 +90,7 @@ if [ $raspberry -eq 0 ]
 
          #also let's pre-copy over some tweets that ALWAYS crash the pi
        cd $program_dir
-        cp $data/badtweets $badtweets
+       cp $data/badtweets $badtweets
 fi
 
         ( cd $program_dir ; sleep 60 ;  while true; do sleep $tweet_interval; nice -n $niceness python $program_dir/sctweet.py && mv $working_rss $rss ; done ) &
@@ -134,7 +146,8 @@ while true
                             else
                                 #sudo shutdown -r now
                                 echo "fail"
-                                exit 1
+                                #exit 1
+                                sudo shutdown -r now
                         fi  
                 fi
                 sleep 5
@@ -193,9 +206,20 @@ while true
 
     if [ $raspberry -ne 0 ]
         then
+            # increment the port for the server
             port=$(( $port + 1 ))
             killall qjackctl.real # things that have spun out of control    	
-            sleep 20
+            sleep 20 # needs a longer sleep because things take longer to settle
+            # has the badtweets file somehow vanished?
+            if [ -f $badtweets ]
+                then
+                    #no, we're fine
+                    echo
+                else
+                    cp $data/badtweets $badtweets
+            fi
+        else
+            sleep 3 #shorter sleep for other computers
     fi
     
 
@@ -205,7 +229,7 @@ while true
 #            nice -n -20 python $program_dir/sctweet.py && mv $working_rss $rss # do it asap
 #            ( sleep $tweet_interval ; touch $should_fetch ) &
 #        else
-        	sleep 3 #let jack settle
+#        	sleep 3 #let jack settle
 #    fi
 
 	$program_dir/jack_script.sh 
