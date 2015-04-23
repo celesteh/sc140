@@ -94,6 +94,8 @@ if [ $raspberry -eq 0 ]
 fi
 
         ( cd $program_dir ; sleep 60 ;  while true; do sleep $tweet_interval; nice -n $niceness python $program_dir/sctweet.py && mv $working_rss $rss ; done ) &
+#        ( cd $program_dir ; sleep 60 ;  while true; do sleep $tweet_interval; nice -n $niceness python $program_dir/sctweet.py && mv $working_rss $rss && mv $working_last_fetch $last_fetch ; done ) &
+
 #    else
 #        # the pi can get them between playing them
 #        ( sleep 60; sleep $tweet_interval; touch $should_fetch ) &
@@ -211,11 +213,9 @@ while true
             killall qjackctl.real # things that have spun out of control    	
             sleep 20 # needs a longer sleep because things take longer to settle
             # has the badtweets file somehow vanished?
-            if [ -f $badtweets ]
+            # or become truncated?
+            if [ ! -f $badtweets ] || [ `du -k $badtweets | cut -f1` -lt `du -k $data/badtweets | cut -f1` ]
                 then
-                    #no, we're fine
-                    echo
-                else
                     cp $data/badtweets $badtweets
             fi
         else
