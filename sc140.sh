@@ -61,7 +61,7 @@ sleep 20
 # I chose to make a local copy of the login html page, rather than try to replay
 # the redirection thing that webpages do with this sort of login
 
-if [ need_lynx -ne 0 ]
+if [ $need_lynx -ne 0 ]
     then
         if [ $timeout -eq 0 ]
             then

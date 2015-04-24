@@ -98,7 +98,8 @@ click.value;
 AppClock.sched(0, {
 	var font, pts, fullscreen, do_win;
 
-	pts = 50;
+	"Font size is %".format(config[\font_size]).postln;
+	pts = (config[\font_size]).asInt(); //50;
 
 	Font.availableFonts.collect({|name| name.asSymbol}).includes(\Monaco).if({
 		font = Font("Monaco", pts);
@@ -290,7 +291,7 @@ do_fetch = {|semaphore, niceness, action, first = false|
 				(node.getNodeName == "item").if({
 					tweet = SCTweet(node);
 					// skip bad tweets
-					bad_tweets.includes(tweet.id).not.if({
+					bad_tweets.includes(tweet.id.asString()).not.if({
 						elements = elements.add(tweet)
 					});
 					//elements = elements.add(SCTweet(node));
