@@ -93,8 +93,7 @@ if [ $raspberry -eq 0 ]
        cp $data/badtweets $badtweets
 fi
 
-        ( cd $program_dir ; sleep 60 ;  while true; do sleep $tweet_interval; nice -n $niceness python $program_dir/sctweet.py && mv $working_rss $rss ; done ) &
-#        ( cd $program_dir ; sleep 60 ;  while true; do sleep $tweet_interval; nice -n $niceness python $program_dir/sctweet.py && mv $working_rss $rss && mv $working_last_fetch $last_fetch ; done ) &
+        ( cd $program_dir ; sleep 60 ;  nice -n $niceness python $program_dir/sctweet.py && mv $working_rss $rss ; while true; do sleep $tweet_interval; nice -n $niceness python $program_dir/sctweet.py --subsequent && mv $working_rss $rss ; done ) &
 
 #    else
 #        # the pi can get them between playing them

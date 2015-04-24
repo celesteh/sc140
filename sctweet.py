@@ -1,6 +1,10 @@
 import tweepy
 import re
 import codecs
+import sys
+from xml.sax.saxutils import escape
+from xml.dom.minidom import parse
+import xml.dom.minidom
 
 
 ###### get ready
@@ -51,14 +55,19 @@ string = ""
 
 unique_ids = []
 unique_tweeters = []
+most_recent = 0
 
 naughty_words = ['unixCmd', 'pipe', 'compile', 'interpret', 'PathName', 'runInTerminal', 'interpretPrint', 'systemCmd', 'prUnixCmd', 'file', 'File', 'UnixFile', 'delete', 'unixCmdInferPID', 'perform', 'preProcessor', 'executeFile', 'compileFile', 'SkipJack', 'exit', 'CmdPeriod']
 
 code_words = ['play|scope', '\(|\{', '\)|\}',]
 
+most_recent = 0
+
 
 def playable( status ):
     "This determines if a tweet should be included in our output"
+
+    global most_recent
     # sort them by id, so we only have unique ones
     tweet_id = 0
     safe = 1
@@ -77,7 +86,8 @@ def playable( status ):
     else :
         if (re.search('\ART\W+\@\w+?:\W+', status.text) != None): #this looks like a retweet
             return 0 
-    tweet_id = status.id
+    tweet_id = str(status.id)
+    most_recent = max(most_recent, int(status.id)) #bigger number is newer
     if tweet_id not in unique_ids:
         safe = 1
         for word in naughty_words:
@@ -93,7 +103,7 @@ def playable( status ):
                     playable = 0
                     break
             if playable == 1 :
-                unique_ids.append(status.id)
+                unique_ids.append(str(status.id))
                 if status.author.id_str not in unique_tweeters:
                     unique_tweeters.append(status.author.id_str)
                     #print (status.author.screen_name)
@@ -112,6 +122,50 @@ def playable( status ):
     return playable
 # enddef
 
+def getItem(tweet, tagName):
+ 
+    item = tweet.getElementsByTagName(tagName)
+    node = item.item(0)
+    nodelist = node.childNodes
+    result = []
+    for node in nodelist:
+        if node.nodeType == node.TEXT_NODE:
+            result.append(node.data)
+    return ''.join(result)
+#end def
+
+
+########### first get all previous tweets
+
+existing_rss = config['rss']
+
+
+# Open XML document using minidom parser
+DOMTree = xml.dom.minidom.parse(existing_rss)
+collection = DOMTree.documentElement
+channel = collection.getElementsByTagName('channel')
+tweets = DOMTree.getElementsByTagName('item')
+for status in tweets:
+    #print (status)
+    guid = str(getItem(status, 'guid'))
+    title = getItem(status, 'title')
+    description = getItem(status, 'description')
+    pubDate = getItem(status, 'pubDate')
+    author = getItem(status, 'author')
+    #print(guid, title, description, pubDate, author)
+    if guid not in unique_ids:
+        unique_ids.append(guid)
+        most_recent = max(most_recent, int(guid)) #bigger number is newer
+        string = unicode(' <item>\n  <title>{}</title>\n'+
+        '  <description>{}</description>\n'+
+        '  <guid>{}</guid>\n'+
+        '  <pubDate>{}</pubDate>\n'+
+        '  <author>{}</author>\n'+
+        ' </item>\n', 'utf-8', 'ignore').format(str(title), escape(description), str(guid), str(pubDate), author)
+        string = codecs.encode(string, 'utf-8', 'ignore')
+        rss.write(string)
+
+# then get new tweets
 
 ########### log in and go
 
@@ -134,7 +188,7 @@ print('Location: ' + me.location)
 print('Friends: ' + str(me.friends_count))
 
 
-
+#print(most_recent)
 
 search_terms = ['#sctweet', '#sc140', '#supercollider', '#sc', 'SinOsc', 'Pbind']
 
@@ -143,38 +197,58 @@ search_terms = ['#sctweet', '#sc140', '#supercollider', '#sc', 'SinOsc', 'Pbind'
 #sc140 =  api.search(q='#sc140',count=100)
 #supercollider =  api.search(q='#supercollider',count=100)
 
+if (len(sys.argv) == 1): # no arguments
+
+    #for tweeter in user_ids:
+    user_ids = []
+    for tweeter in api.friends_ids(user_id=me.id_str):
+        user_ids.append(tweeter)
+
+        for status in tweepy.Cursor(api.user_timeline, user_id=tweeter, since_id=most_recent, count=100).items(300):
+            playable(status)
+
+else: # right now we only take one argument, but this may change
+    #get last tweet from file
+    #prev_max=0 # obvs this will be different
+    # get our timeline since last tweet
+    for status in tweepy.Cursor(api.home_timeline, since_id=most_recent).items(1500):
+        playable(status)
+
+#endif
+
+found_tweeters = []
 
 for term in search_terms:
     #for page in range(1, 10):
         for status in tweepy.Cursor(api.search, q=term).items(200):
-            playable(status)
+            if (playable(status) == 1):
+                found_tweeters.append(status.author.id_str)
 
-#for tweeter in user_ids:
-user_ids = []
-for tweeter in api.friends_ids(user_id=me.id_str):
-    user_ids.append(tweeter)
 
-    for status in tweepy.Cursor(api.user_timeline, user_id=tweeter, count=100).items(300):
-        playable(status)
-
-# ok, close the file
-rss.write('</channel>\n</rss>')
-rss.close;
 
 # let's make sure we're following everyone
 for user in unique_tweeters:
+    user = str(user)
     if user not in user_ids:
         #add as friend
         #api.create_friendship(user_id=user, follow=1)
         # this isn't working for some reason
         #print (user)
-        if not api.exists_friendship(user_a=me.id_str, user_b=user) :
+        #if not api.exists_friendship(user_a=me.id_str, user_b=user) :
             api.create_friendship(user_id=user, follow=1)
+            for status in tweepy.Cursor(api.user_timeline, user_id=tweeter, count=100).items(300):
+                playable(status)  
+            #endfor          
     #endif
 #endfor 
 
+# ok, close the file
+rss.write('</channel>\n</rss>')
+rss.close;
 
-
+#newest = open(config['working_last_fetch'], 'w')
+#newest.write(str(most_recent))
+#newest.close;
 
 print ('done')
 

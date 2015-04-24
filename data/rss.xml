@@ -1215,5 +1215,40 @@ play{Out.ar([0,1],LPF.ar(Saw.ar(SinOsc.kr(XLine.kr(9,5000,9),0,20,99),0.7,0),500
   <pubDate>2014-03-04 17:56:20</pubDate>
   <author>Schemawound</author>
  </item>
+ <item>
+  <title>591269567390973952</title>
+  <description>{CombC.ar(Decay.ar(Dust.ar(1,0.5),0.2,WhiteNoise.ar),0.2,0.2,3)*MouseButton.kr(0,5)}.play;//Otro nuevo. #Sc140</description>
+  <guid>591269567390973952</guid>
+  <pubDate>2015-04-23 15:57:04</pubDate>
+  <author>Ferdoropeza</author>
+ </item>
+ <item>
+  <title>591079762233294848</title>
+  <description>play{BPF.ar(Saw.ar(328,0.7),[Line.ar(5000,1,5),XLine.ar(1,5000,5)],0.7)*EnvGen.kr(Env.perc(0.6,10,1),1,doneAction:2)}#SuperCollider</description>
+  <guid>591079762233294848</guid>
+  <pubDate>2015-04-23 03:22:51</pubDate>
+  <author>Ferdoropeza</author>
+ </item>
+ <item>
+  <title>590216984643706880</title>
+  <description>p=Pulse;o=SinOsc;{DynKlank.ar(`[{4.0.rrand(6)*100}!9*o.kr(1/270,pi.rand,0,100),b,1!9],p.ar(450,p.ar(o.ar(0.01,0,55,412)),2))!2}.play//#sc140</description>
+  <guid>590216984643706880</guid>
+  <pubDate>2015-04-20 18:14:29</pubDate>
+  <author>celesteh</author>
+ </item>
+ <item>
+  <title>591326071703740419</title>
+  <description>{a=BufDelayL.ar(b=Buffer.read(s,Platform.resourceDir+/+"sounds/a11wlk01.wav"),(GVerb.ar(PlayBuf.ar(1,b,loop:1))*SinOsc.ar).tanh,10)}.play</description>
+  <guid>591326071703740419</guid>
+  <pubDate>2015-04-23 19:41:36</pubDate>
+  <author>celesteh</author>
+ </item>
+ <item>
+  <title>591561854129954816</title>
+  <description>@hellocatfood fun times. Is it in the commons (by the gate, with the playground) or in their other space?</description>
+  <guid>591561854129954816</guid>
+  <pubDate>2015-04-24 11:18:31</pubDate>
+  <author>celesteh</author>
+ </item>
 </channel>
 </rss>
