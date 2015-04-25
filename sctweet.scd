@@ -31,7 +31,7 @@ busy = Semaphore.new;
 
 // Get arguments , read config file
 do_config = {
-	var config_path, config_arr, server_port;
+	var config_path, config_arr, server_port, bad_file, tweet_arr;
 
 	server_port = thisProcess.argv[0];
 
@@ -44,6 +44,7 @@ do_config = {
 
 	if ((isRaspberry) && (server_port != "0") , {
 		Server.default = Server(\Raspberry, NetAddr("localhost", server_port.asInteger));
+		s = Server.default;
 	});
 
 	File.exists(config_path).if ({
@@ -65,12 +66,18 @@ do_config = {
 
 	// get bad tweets
 	File.exists(config[\badtweets]). if ({
-		bad_tweets = FileReader.read(config[\badtweets], true, true);
-		bad_tweets.isNil.if ({
-			bad_tweets = [];
+		bad_file = File.new(config[\badtweets], "r");
+		tweet_arr = bad_file.readAllStringRTF.split($\n);
+		bad_file.close;
+		tweet_arr.isNil.if ({
+			//bad_tweets = [];
 			} , {
-				bad_tweets= bad_tweets.flat;
-		});
+				tweet_arr.do({|str|
+					(str.asInt != 0).if ({ // useful values will be bigger than 0
+						bad_tweets = bad_tweets.add(str)
+					});
+				});
+		})
 	});
 
 	rss = config[\rss];
