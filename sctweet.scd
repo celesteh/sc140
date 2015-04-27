@@ -425,8 +425,12 @@ stop_tweet = { |tweet|
 	s = Server.default;
 	click.value;
 	Server.default.boot(onFailure:{});
-	Server.default.doWhenBooted({/*{rout}.value.play*/}, onFailure:{1.exit});
+	//Server.default.doWhenBooted({/*{rout}.value.play*/}, onFailure:{1.exit});
 	Server.default.sync;
+			(Server.default.serverRunning.not).if({
+				// server didn't boot
+				1.exit;
+			});
 	Server.default.volume = 0; // 0db is amp of 1
 	click.value;
 
@@ -447,7 +451,7 @@ play = { |item, should_move=false, semaphore|
 
 	item.playable.if({
 
-		syn = Synth(\stereoListenForSilence,  nil, RootNode(s), \addToTail);
+		syn = Synth(\stereoListenForSilence,  nil, RootNode(Server.default), \addToTail);
 
 		// make a note of what we're playing
 		"echo \"%\" > %".format(item.id, playing_file).postln.unixCmd;
@@ -564,11 +568,14 @@ playnew = { |semaphore|
 
 
 
-
+Task({
 // pi
-s.waitForBoot(onFailure:{1.exit}, onComplete: {
+//s.waitForBoot(onFailure:{"didn't boot".postln; 1.exit}, onComplete: {
 
 	var action;
+
+	Server.default.boot;
+	Server.default.sync;
 
 	SynthDef(\stereoListenForSilence, {|in=0, out=0|
 		var input;
@@ -576,6 +583,8 @@ s.waitForBoot(onFailure:{1.exit}, onComplete: {
 		SendPeakRMS.kr(input, 1, 3, '/loudnessMonitoringForSuperCollider140Tweets');
 		ReplaceOut.ar(0, LeakDC.ar(input).tanh);
 	}).add;
+
+	Server.default.sync;
 
 	//s.meter;
 
@@ -592,8 +601,12 @@ s.waitForBoot(onFailure:{1.exit}, onComplete: {
 			var code, new_code, syn, play;
 
 			Server.default.boot(onFailure:{});
-			Server.default.doWhenBooted({}, onFailure:{1.exit});
+			//Server.default.doWhenBooted({}, onFailure:{1.exit});
 			Server.default.sync;
+			(Server.default.serverRunning.not).if({
+				// server didn't boot
+				1.exit;
+			});
 
 			//fetcher.signal;
 			//fetcher.wait;
@@ -754,7 +767,8 @@ s.waitForBoot(onFailure:{1.exit}, onComplete: {
 
 			SkipJack({do_fetch.(semaphore, action: action)}, 10*60, false, "start_fetch");
 
-})
+//})
+}).play;
 
 )
 
