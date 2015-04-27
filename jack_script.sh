@@ -42,7 +42,7 @@ if aplay -l | grep -qi ultra
 	#start jack
     if [ $raspberry -ne 0 ]
         then
-    	    ( jackd -T -d alsa -d hw:Ultra -r 44100 || sudo shutdown -r now ) &
+    	    ( jackd -T -Z -d alsa -d hw:Ultra -r 44100 -i 0 -o 2 -P || ( killall jackd ; sleep 10 ; jackd -T -Z -d alsa -d hw:Ultra -r 44100 -i 0 -o 2 -P || sudo shutdown -r now ) ) &
     fi
     if [ $raspberry -eq 0 ]
         then
@@ -57,7 +57,7 @@ if aplay -l | grep -qi ultra
             #sleep 1
             killall jackd
             sleep 5
-            ( jackd -T -p 32 -d alsa -d hw:0,0 -r 44100 -p 1024 -n3  -s || ( killall jackd ; sleep 10 ; jackd -T -p 32 -d alsa -d hw:0,0 -r 44100 -p 1024 -n3  -s || sudo shutdown -r now )) &
+            ( jackd -T -p 32 -d alsa -d hw:0,0 -r 44100 -p 1024 -n3  -s -i 0 -o 2 || ( killall jackd ; sleep 10 ; jackd -T -p 32 -d alsa -d hw:0,0 -r 44100 -p 1024 -n3  -s -i 0 -o 2 || sudo shutdown -r now )) &
     fi
     if [ $raspberry -eq 0  ]
         then
