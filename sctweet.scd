@@ -103,7 +103,7 @@ click =  {
 click.value;
 
 boot = {
-	var condition;
+	var condition, bundle;
 
 	Server.default.bootSync(condition);
 	(Server.default.serverRunning.not).if({
@@ -111,6 +111,13 @@ boot = {
 		"didn't boot".postln;
 		1.exit;
 	});
+
+	// If we're booting, we want a clean slate
+	bundle = Server.default.makeBundle(false, {
+		Server.default.freeAll;
+		Server.default.volume = 0;
+	});
+	Server.default.sync(condition, bundle);
 };
 
 
@@ -620,6 +627,8 @@ Task({
 	});
 	*/
 	boot.();
+
+	isRaspberry.if({ 5.wait; });
 
 	bundle = Server.default.makeBundle(false, {
 		SynthDef(\stereoListenForSilence, {|in=0, out=0|
