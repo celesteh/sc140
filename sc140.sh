@@ -122,7 +122,7 @@ while true
         if [ $raspberry -ne 0 ]
             then
                 
-            	$sc_dir/scsynth -u $port &
+            	$sc_dir/scsynth -i 0 -o 2-u $port &
                 server=$!
                 sleep 1
                 # is the server running?
