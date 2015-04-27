@@ -104,6 +104,7 @@ fi
 
 source $program_dir/jack_script.sh 
 
+sleep 60
 
 sleep 2
 
