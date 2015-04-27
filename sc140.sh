@@ -104,8 +104,6 @@ fi
 
 source $program_dir/jack_script.sh 
 
-sleep 60
-
 sleep 2
 
 while true
@@ -123,7 +121,7 @@ while true
         if [ $raspberry -ne 0 ]
             then
                 
-            	$sc_dir/scsynth -i 0 -o 2-u $port &
+            	$sc_dir/scsynth -i 0 -o 2 -u $port &
                 server=$!
                 sleep 1
                 # is the server running?
@@ -136,7 +134,7 @@ while true
                         
                         sleep 5
                         port=$(( $port + 1 ))                        
-                	    $sc_dir/scsynth -u $port &
+                	    $sc_dir/scsynth -i 0 -o 2 -u $port &
                         server=$!
                         
                         sleep 1
