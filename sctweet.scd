@@ -3,7 +3,7 @@ var fetch, de_dup, playnew, new_tweets, old_tweets, clear_vars, wait_time, fetch
 busy, click, clicker, f_task, stop_tweet, fetch_click, monitor, fade_time, play, min_dur, bad_tweets, do_config, config;
 var tweet_mod_time, rss, playing_file, alive_file;
 var update_gui, tweet, window, chars_per_line;
-var semaphore;
+var semaphore, boot;
 
 
 
@@ -48,6 +48,7 @@ do_config = {
 		options.numOutputBusChannels = 2;
 		Server.default = Server(\Raspberry, NetAddr("localhost", server_port.asInteger), options);
 		s = Server.default;
+		Server.default.boot;
 	});
 
 	File.exists(config_path).if ({
@@ -101,7 +102,16 @@ click =  {
 
 click.value;
 
+boot = {
+	var condition;
 
+	Server.default.bootSync(condition);
+	(Server.default.serverRunning.not).if({
+		// server didn't boot
+		"didn't boot".postln;
+		1.exit;
+	});
+};
 
 
 // set up graphics
@@ -396,6 +406,7 @@ clear_vars = {
 };
 
 stop_tweet = { |tweet|
+	var condition, bundle;
 	//var ramp;
 
 	//ramp = fade_time.reciprocal;
@@ -427,6 +438,7 @@ stop_tweet = { |tweet|
 	this.clearAll;
 	s = Server.default;
 	click.value;
+	/*
 	Server.default.boot(onFailure:{});
 	//Server.default.doWhenBooted({/*{rout}.value.play*/}, onFailure:{1.exit});
 	Server.default.sync;
@@ -434,6 +446,17 @@ stop_tweet = { |tweet|
 				// server didn't boot
 				1.exit;
 			});
+	*//*
+	Server.default.bootSync(condition);
+
+	(Server.default.serverRunning.not).if({
+		// server didn't boot
+		"didn't boot".postln;
+		1.exit;
+	});
+	*/
+	boot.();
+
 	Server.default.volume = 0; // 0db is amp of 1
 	click.value;
 
@@ -442,10 +465,12 @@ stop_tweet = { |tweet|
 
 play = { |item, should_move=false, semaphore|
 
-	var play, syn, lastrms, osc_listener, startTime, endTime;
+	var play, syn, lastrms, osc_listener, startTime, endTime, condition, bundle;
+
 	click.value;
 	//pi
-	s.boot;
+	//s.boot;
+	boot.();
 
 	//"play".postln;
 	//item.class.postln;
@@ -454,7 +479,6 @@ play = { |item, should_move=false, semaphore|
 
 	item.playable.if({
 
-		syn = Synth(\stereoListenForSilence,  nil, RootNode(Server.default), \addToTail);
 
 		// make a note of what we're playing
 		"echo \"%\" > %".format(item.id, playing_file).postln.unixCmd;
@@ -491,6 +515,12 @@ play = { |item, should_move=false, semaphore|
 
 
 			//monitor for loudness
+
+			bundle = Server.default.makeBundle(false, {
+				syn = Synth(\stereoListenForSilence,  nil, RootNode(Server.default), \addToTail);
+			});
+
+			Server.default.sync(condition, bundle);
 
 			lastrms=Array.fill(min_dur, {1});
 			osc_listener = OSCFunc({ |msg|
@@ -575,19 +605,33 @@ Task({
 // pi
 //s.waitForBoot(onFailure:{"didn't boot".postln; 1.exit}, onComplete: {
 
-	var action;
+	var action, condition, bundle;
 
-	Server.default.boot;
-	Server.default.sync;
+	//	Server.default.boot;
+	//	Server.default.sync;
 
-	SynthDef(\stereoListenForSilence, {|in=0, out=0|
-		var input;
-		input = In.ar(in, Server.default.options.numOutputBusChannels);
-		SendPeakRMS.kr(input, 1, 3, '/loudnessMonitoringForSuperCollider140Tweets');
-		ReplaceOut.ar(0, LeakDC.ar(input).tanh);
-	}).add;
+	/*
+	Server.default.bootSync(condition);
 
-	Server.default.sync;
+	(Server.default.serverRunning.not).if({
+		// server didn't boot
+		"didn't boot".postln;
+		1.exit;
+	});
+	*/
+	boot.();
+
+	bundle = Server.default.makeBundle(false, {
+		SynthDef(\stereoListenForSilence, {|in=0, out=0|
+			var input;
+			input = In.ar(in, Server.default.options.numOutputBusChannels);
+			SendPeakRMS.kr(input, 1, 3, '/loudnessMonitoringForSuperCollider140Tweets');
+			ReplaceOut.ar(0, LeakDC.ar(input).tanh);
+		}).add;
+	});
+
+	//Server.default.sync;
+	Server.default.sync(condition, bundle);
 
 	//s.meter;
 
@@ -603,6 +647,7 @@ Task({
 
 			var code, new_code, syn, play;
 
+			/*
 			Server.default.boot(onFailure:{});
 			//Server.default.doWhenBooted({}, onFailure:{1.exit});
 			Server.default.sync;
@@ -610,6 +655,17 @@ Task({
 				// server didn't boot
 				1.exit;
 			});
+			*/
+			/*
+			Server.default.bootSync(condition);
+
+			(Server.default.serverRunning.not).if({
+				// server didn't boot
+				"didn't boot".postln;
+				1.exit;
+			});
+			*/
+			boot.();
 
 			//fetcher.signal;
 			//fetcher.wait;
