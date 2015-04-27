@@ -43,6 +43,7 @@ if aplay -l | grep -qi ultra
     if [ $raspberry -ne 0 ]
         then
     	    ( jackd -T -d alsa -d hw:Ultra -r 44100 -i 0 -P || ( killall jackd ; sleep 10 ; jackd -T -d alsa -d hw:Ultra -r 44100 -i 0 -P || sudo shutdown -r now ) ) &
+            sleep 10
     fi
     if [ $raspberry -eq 0 ]
         then
