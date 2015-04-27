@@ -31,7 +31,7 @@ busy = Semaphore.new;
 
 // Get arguments , read config file
 do_config = {
-	var config_path, config_arr, server_port, bad_file, tweet_arr;
+	var config_path, config_arr, server_port, bad_file, tweet_arr, options;
 
 	server_port = thisProcess.argv[0];
 
@@ -43,7 +43,10 @@ do_config = {
 	isRaspberry = (thisProcess.argv[2] == "1");
 
 	if ((isRaspberry) && (server_port != "0") , {
-		Server.default = Server(\Raspberry, NetAddr("localhost", server_port.asInteger));
+		options = ServerOptions.new;
+		options.numInputBusChannels = 0;
+		options.numOutputBusChannels = 2;
+		Server.default = Server(\Raspberry, NetAddr("localhost", server_port.asInteger), options);
 		s = Server.default;
 	});
 
