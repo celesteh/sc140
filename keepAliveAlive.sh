@@ -29,5 +29,13 @@ server=$3
     #    fi
 
     sleep 2
-    kill -9 $sclang
+    if  kill -0 $sclang  2> /dev/null 
+        then
+            kill -9 $sclang
+    fi
 
+    sleep 2
+    if  kill -0 $sclang  2> /dev/null 
+        then
+            killall jackd
+    fi
