@@ -185,6 +185,7 @@ while true
         if [ -f $playing ] 
             then
                 cat $playing >> $badtweets
+                rm $playing
         fi
 
     
