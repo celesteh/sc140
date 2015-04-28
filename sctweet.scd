@@ -97,7 +97,7 @@ fade_time = 45.reciprocal;
 
 click =  {
 	clicker = 2;
-	"touch %".format(alive_file).unixCmd;
+	"touch %".format(alive_file).postln.unixCmd;
 };
 
 click.value;
@@ -118,7 +118,7 @@ boot = {
 
 	Server.default.boot(onFailure:{});
 	1.wait;
-	Server.default.doWhenBooted(limit: 1000, onFailure:{1.exit}, // long limit
+	Server.default.doWhenBooted(limit: 5000, onFailure:{1.exit}, // long limit
 		onComplete: {
 			//Server.default.sync(condition);
 
@@ -619,7 +619,8 @@ Task({
 
 	var action, condition, bundle;
 
-	isRaspberry.if({ config[\start_wait].asInt.wait; "done waiting".postln; click.(); boot.(); click.();});
+	//isRaspberry.if({ config[\start_wait].asInt.wait; "done waiting".postln; click.(); boot.(); click.();});
+	click.();
 
 	boot.();
 
