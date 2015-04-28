@@ -43,6 +43,7 @@ do_config = {
 	isRaspberry = (thisProcess.argv[2] == "1");
 
 	if ((isRaspberry) && (server_port != "0") , {
+		"rm %".format(Platform.userAppSupportDir ++ "/synthdefs/temp*.scsyndef").postln.unixCmd;
 		options = ServerOptions.new;
 		options.numInputBusChannels = 0;
 		options.numOutputBusChannels = 2;
