@@ -626,7 +626,7 @@ Task({
 		1.exit;
 	});
 	*/
-	isRaspberry.if({ 60.wait; "done waiting".postln; click.(); boot.(); click.();});
+	isRaspberry.if({ 40.wait; "done waiting".postln; click.(); boot.(); click.();});
 
 	boot.();
 
