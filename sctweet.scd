@@ -48,7 +48,7 @@ do_config = {
 		options.numOutputBusChannels = 2;
 		Server.default = Server(\Raspberry, NetAddr("localhost", server_port.asInteger), options);
 		s = Server.default;
-		Server.default.boot;
+		Server.default.boot; // already booted, just formalising it
 	});
 
 	File.exists(config_path).if ({
@@ -105,19 +105,37 @@ click.value;
 boot = {
 	var condition, bundle;
 
-	Server.default.bootSync(condition);
+	"entering boot".postln;
+	/*
+	Server.default.bootSync(condition); // this hangs forever if it didn't boot
 	(Server.default.serverRunning.not).if({
 		// server didn't boot
 		"didn't boot".postln;
 		1.exit;
 	});
+	*/
+	condition = Condition(false);
 
-	// If we're booting, we want a clean slate
-	bundle = Server.default.makeBundle(false, {
-		Server.default.freeAll;
-		Server.default.volume = 0;
+	Server.default.boot(onFailure:{});
+	1.wait;
+	Server.default.doWhenBooted(limit: 1000, onFailure:{1.exit},
+		onComplete: {
+			//Server.default.sync(condition);
+
+
+			// If we're booting, we want a clean slate
+			bundle = Server.default.makeBundle(false, {
+				Server.default.freeAll;
+				Server.default.volume = 0;
+			});
+			Server.default.sync(condition, bundle); // will not proceede until this has happened
+			// ergo this can only be called from a Routine/Task/fork/etc
+			condition.test = true;
+			condition.signal;
 	});
-	Server.default.sync(condition, bundle);
+
+	condition.wait;
+	"leaving boot".postln;
 };
 
 
@@ -445,23 +463,7 @@ stop_tweet = { |tweet|
 	this.clearAll;
 	s = Server.default;
 	click.value;
-	/*
-	Server.default.boot(onFailure:{});
-	//Server.default.doWhenBooted({/*{rout}.value.play*/}, onFailure:{1.exit});
-	Server.default.sync;
-			(Server.default.serverRunning.not).if({
-				// server didn't boot
-				1.exit;
-			});
-	*//*
-	Server.default.bootSync(condition);
 
-	(Server.default.serverRunning.not).if({
-		// server didn't boot
-		"didn't boot".postln;
-		1.exit;
-	});
-	*/
 	boot.();
 
 	Server.default.volume = 0; // 0db is amp of 1
@@ -614,19 +616,7 @@ Task({
 
 	var action, condition, bundle;
 
-	//	Server.default.boot;
-	//	Server.default.sync;
-
-	/*
-	Server.default.bootSync(condition);
-
-	(Server.default.serverRunning.not).if({
-		// server didn't boot
-		"didn't boot".postln;
-		1.exit;
-	});
-	*/
-	isRaspberry.if({ 40.wait; "done waiting".postln; click.(); boot.(); click.();});
+	isRaspberry.if({ config[\start_wait].asInt.wait; "done waiting".postln; click.(); boot.(); click.();});
 
 	boot.();
 
@@ -656,24 +646,6 @@ Task({
 
 			var code, new_code, syn, play;
 
-			/*
-			Server.default.boot(onFailure:{});
-			//Server.default.doWhenBooted({}, onFailure:{1.exit});
-			Server.default.sync;
-			(Server.default.serverRunning.not).if({
-				// server didn't boot
-				1.exit;
-			});
-			*/
-			/*
-			Server.default.bootSync(condition);
-
-			(Server.default.serverRunning.not).if({
-				// server didn't boot
-				"didn't boot".postln;
-				1.exit;
-			});
-			*/
 			boot.();
 
 			//fetcher.signal;
