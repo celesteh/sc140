@@ -549,7 +549,9 @@ play = { |item, should_move=false, semaphore|
 			//(dur-10).wait;
 			//update_gui.();
 			//10.wait;
+			click.();
 			dur.wait;
+			click.();
 
 			endTime = Date.getDate;
 			syn.free;
