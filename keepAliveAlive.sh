@@ -27,4 +27,7 @@ server=$3
     #    then
     #        kill $server
     #    fi
-        
+
+    sleep 2
+    kill -9 $sclang
+
