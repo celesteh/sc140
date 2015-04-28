@@ -3,6 +3,7 @@
 . sc140.config
 
 sleep_time=60
+too_long=$(( $dur * 5 / 4 ))
 
 rm $alive
 
@@ -10,6 +11,18 @@ sleep $sleep_time
 
 while true
     do
+
+        if [ -f $playing ] ; then
+            # see if we've been playing too long
+            last_played_a_new_sound=$(( $(date +%s) - $(date +%s -r $playing) ))
+            if [ $last_played_a_new_sound -gt $too_long ] ; then
+                 if [ -f $playing ] ; then # double check
+                    echo "we're stuck playing one thing for too long"
+                    kill $1
+                    exit 0
+                fi
+            fi
+        fi
 
 
         if [ ! -f $alive ]; then
