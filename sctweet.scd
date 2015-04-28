@@ -118,7 +118,7 @@ boot = {
 
 	Server.default.boot(onFailure:{});
 	1.wait;
-	Server.default.doWhenBooted(limit: 1000, onFailure:{1.exit},
+	Server.default.doWhenBooted(limit: 1000, onFailure:{1.exit}, // long limit
 		onComplete: {
 			//Server.default.sync(condition);
 
@@ -135,6 +135,7 @@ boot = {
 	});
 
 	condition.wait;
+	click.();
 	"leaving boot".postln;
 };
 
