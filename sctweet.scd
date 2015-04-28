@@ -628,7 +628,7 @@ Task({
 	*/
 	boot.();
 
-	isRaspberry.if({ 20.wait; boot.(); });
+	isRaspberry.if({ 20.wait; click.(); boot.(); click.();});
 
 	bundle = Server.default.makeBundle(false, {
 		SynthDef(\stereoListenForSilence, {|in=0, out=0|
