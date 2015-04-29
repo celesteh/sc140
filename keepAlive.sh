@@ -2,7 +2,7 @@
 
 . sc140.config
 
-sleep_time=100 # longer than one play-through
+sleep_time=$(( $dur + 10 ))  # longer than one play-through
 too_long=$(( $dur * 5 / 4 ))
 
 rm $alive
