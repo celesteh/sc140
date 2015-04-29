@@ -118,7 +118,7 @@ boot = {
 	condition = Condition(false);
 
 	Server.default.boot(onFailure:{});
-	1.wait;
+	0.1.wait;
 	Server.default.doWhenBooted(limit: 5000, onFailure:{1.exit}, // long limit
 		onComplete: {
 			//Server.default.sync(condition);
@@ -620,7 +620,7 @@ Task({
 
 	var action, condition, bundle;
 
-	//isRaspberry.if({ config[\start_wait].asInt.wait; "done waiting".postln; click.(); boot.(); click.();});
+	isRaspberry.if({ config[\start_wait].asInt.wait; "done waiting".postln; click.(); boot.();});
 	click.();
 
 	boot.();

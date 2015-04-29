@@ -193,6 +193,7 @@ while true
 	sleep 1
         killall scsynth
         killall jackd
+        jack_control stop
         # do we know the server's pid?
         if [ $server -ne 0 ]
             then
@@ -210,13 +211,24 @@ while true
             # increment the port for the server
             port=$(( $port + 1 ))
             killall qjackctl.real # things that have spun out of control    	
-            sleep 20 # needs a longer sleep because things take longer to settle
+            sleep 10 # needs a longer sleep because things take longer to settle
             # has the badtweets file somehow vanished?
             # or become truncated?
             if [ ! -f $badtweets ] || [ `du -k $badtweets | cut -f1` -lt `du -k $data/badtweets | cut -f1` ]
                 then
                     cp $data/badtweets $badtweets
             fi
+
+            #get rid of temporary synth files
+            if [ -e $synthdef_dir ] 
+                then
+                    if [ -d $synthdef_dir ]
+                        then
+                            rm $synthdef_dir/temp*.scsyndef
+                    fi
+            fi
+
+
         else
             sleep 3 #shorter sleep for other computers
     fi
