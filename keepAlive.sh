@@ -2,12 +2,12 @@
 
 . sc140.config
 
-sleep_time=60
+sleep_time=100 # longer than one play-through
 too_long=$(( $dur * 5 / 4 ))
 
 rm $alive
 
-sleep $sleep_time
+sleep 60 # git it time to start
 
 while true
     do
