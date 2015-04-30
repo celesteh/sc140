@@ -492,7 +492,7 @@ play = { |item, should_move=false, semaphore|
 	//"play".postln;
 	//item.class.postln;
 
-		gui_fade={((100 - Server.default.avgCPU) / 2.2).max(1).reciprocal};
+	gui_fade={((100 - Server.default.avgCPU) / 2.2).max(1).reciprocal};
 
 
 	item.playable.if({
@@ -555,8 +555,9 @@ play = { |item, should_move=false, semaphore|
 
 
 			//click.();
-			dur.wait;
+			(dur - 2).wait;
 			update_gui.(gui_fade_time:gui_fade.());
+			2.wait;
 			//click.();
 
 			endTime = Date.getDate;
