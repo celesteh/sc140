@@ -3,6 +3,20 @@
 <channel>
  <title>Tweets</title>
  <item>
+  <title>5</title>
+  <decription>play{f=LocalIn.ar(2).tanh;k=Latch.kr(f[0].abs,Impulse.kr(1/4));LocalOut.ar(f+CombC.ar(Blip.ar([4,6],100*k+50,0.9),1,k*0.3,50*f));f}//44.1kHz</decription>
+  <guid>5</guid>
+  <pubDate>2009-10-1 01:01:01</pubDate>
+  <author>earslap</author>
+ </item>
+ <item>
+  <title>6</title>
+  <description>f={|t|Pbind(\note,Pseq([-1,1,6,8,9,1,-1,8,6,1,9,8]+5,319),\dur,t)};Ptpar([0,f.(1/6),12,f.(0.1672)],1).play//#supercollider reich MT @earslap</description>
+  <guid>6</guid>
+  <pubDate>2009-10-01 01:01:02</pubDate>
+  <author>celesteh</author>
+ </item>
+ <item>
   <title>448496913919516672</title>
   <description>play{a=SinOsc;mean({|i|b=a.ar(a.ar(j=i+0.99)/9,a.ar(a.ar(j/99))*9,j*9).tanh;Pan2.ar(a.ar(b.exprange(j*99,j+1*99)+i),b)}!9)}// #SuperCollider</description>
   <guid>448496913919516672</guid>
