@@ -46,7 +46,7 @@ server=$3
         do
             if [[ $count -gt $dur ]] && [ -f /etc/rpi-issue ]
                 then # give it 90 tries
-                    sudo reboot -r now
+                    sudo shutdown -r now
             fi
             echo "kill everything"
             kill -9 $sclang
