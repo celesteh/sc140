@@ -19,6 +19,8 @@ while true
                  if [ -f $playing ] ; then # double check
                     echo "we're stuck playing one thing for too long"
                     kill $1
+                    #make extra sure
+                    killall jackd
                     exit 0
                 fi
             fi
