@@ -190,7 +190,7 @@ print('Friends: ' + str(me.friends_count))
 
 #print(most_recent)
 
-search_terms = ['#sctweet', '#sc140', '#supercollider', '#sc', 'SinOsc', 'Pbind']
+search_terms = ['sctweet', 'sc140', 'sccode', '#supercollider', '#sc', 'SinOsc', 'Pbind']
 
 # ok, so get also tweets tagged #sctweet #sc140 and #supercollider
 #sctweet = api.search(q='#sctweet',count=100)
