@@ -7,7 +7,7 @@ too_long=$(( $dur * 5 / 4 ))
 
 rm $alive
 
-sleep 60 # git it time to start
+sleep 60 # give it time to start
 
 while true
     do
@@ -37,7 +37,7 @@ while true
         fi
 
         sleep $sleep_time
-        sleep_time=300
+        sleep_time=$(( $dur * 2 ))
         # the first trip through the loop is fast to catch start-up errors
 
 done
