@@ -2,7 +2,7 @@
 var fetch, de_dup, playnew, new_tweets, old_tweets, clear_vars, wait_time, fetcher, do_fetch, dur, rout, isRaspberry,
 busy, click, clicker, f_task, stop_tweet, fetch_click, monitor, fade_time, play, min_dur, bad_tweets, do_config, config;
 var tweet_mod_time, rss, playing_file, alive_file;
-var update_gui, tweet, window, chars_per_line;
+var update_gui, tweet, window, chars_per_line, alpha;
 var semaphore, boot;
 
 
@@ -165,6 +165,7 @@ AppClock.sched(0, {
 
 		tweet.background = Color.black;
 		tweet.stringColor = Color.green;
+		alpha = 1;
 		tweet.font = font;
 		tweet.align = \left;
 		tweet.string = "#sc140";
@@ -193,6 +194,8 @@ AppClock.sched(0, {
 
 	nil
 });
+
+
 
 
 update_gui = {|code, author, gui_fade_time = 0.2|
@@ -247,7 +250,9 @@ update_gui = {|code, author, gui_fade_time = 0.2|
 		(state == 0).if ( // fade in
 			{
 				//(tweet.string == "").if ({ state = 1 }); // if there's nothing to fade, don't bother
-				colour = Color.green(count.linlin(0, steps, 0, 1));
+				alpha = alpha.min(count.linlin(0, steps, 0, 1));
+				(alpha == 0).if({ count = 0 });
+				colour = Color.green(alpha);
 				tweet.stringColor = colour;
 				count = count -1;
 				return_val = gui_fade_time;
@@ -277,9 +282,10 @@ update_gui = {|code, author, gui_fade_time = 0.2|
 							count = count +1;
 							return_val = gui_fade_time;
 
-							(count > steps).if({
+						(count > steps).if({
 							tweet.stringColor = Color.green;
 								//state = 0;
+							alpha = 1;
 								return_val = nil
 							}); // done
 						//});
@@ -468,15 +474,15 @@ stop_tweet = { |tweet|
 
 	boot.();
 
-	Server.default.volume = 0; // 0db is amp of 1
-	click.value;
+	//Server.default.volume = 0; // 0db is amp of 1
+	//click.value;
 
 
 };
 
 play = { |item, should_move=false, semaphore|
 
-	var play, syn, lastrms, osc_listener, startTime, endTime, condition, bundle;
+	var play, syn, lastrms, osc_listener, startTime, endTime, condition, bundle, gui_fade;
 
 	click.value;
 	//pi
@@ -486,6 +492,7 @@ play = { |item, should_move=false, semaphore|
 	//"play".postln;
 	//item.class.postln;
 
+		gui_fade={((100 - Server.default.avgCPU) / 2.2).max(1).reciprocal};
 
 
 	item.playable.if({
@@ -516,7 +523,7 @@ play = { |item, should_move=false, semaphore|
 
 			//gui_fade_time = Server.local.avgCPU / 9; // higher load, fewer steps
 
-			update_gui.(item.code, item.author, ((100 - Server.default.avgCPU) / 2.2).max(1).reciprocal);
+			update_gui.(item.code, item.author, gui_fade.());
 
 			//should_move.if({
 			//	semaphore.wait;
@@ -547,12 +554,10 @@ play = { |item, should_move=false, semaphore|
 
 
 
-			//(dur-10).wait;
-			//update_gui.();
-			//10.wait;
-			click.();
+			//click.();
 			dur.wait;
-			click.();
+			update_gui.(gui_fade_time:gui_fade.());
+			//click.();
 
 			endTime = Date.getDate;
 			syn.free;
@@ -577,7 +582,7 @@ play = { |item, should_move=false, semaphore|
 		// remove note
 		"rm %".format(playing_file).unixCmd;
 
-		1.wait;
+		0.5.wait;
 		click.value;
 	});
 };
@@ -615,8 +620,8 @@ playnew = { |semaphore|
 
 
 Task({
-// pi
-//s.waitForBoot(onFailure:{"didn't boot".postln; 1.exit}, onComplete: {
+	// pi
+	//s.waitForBoot(onFailure:{"didn't boot".postln; 1.exit}, onComplete: {
 
 	var action, condition, bundle;
 
@@ -657,7 +662,7 @@ Task({
 			//fetcher.wait;
 			//fetch.value(semaphore);
 
-			5.wait;
+			1.wait;
 
 			"go!".postln;
 
