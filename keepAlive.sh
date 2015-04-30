@@ -26,8 +26,8 @@ while true
                         killall scsynth
                         sleep 0
                         killall jackd
-                        sleep 1
-                        killall jackd
+                        #sleep 1
+                        #killall jackd
                         exit 0
                     fi
                 fi

@@ -31,11 +31,33 @@ server=$3
     sleep 2
     if  kill -0 $sclang  2> /dev/null 
         then
+            echo "sclang didn't die"
+            if [[ $server -ne 0 ]]
+                then
+                    kill $server
+            fi
+            sleep 0
             kill -9 $sclang
     fi
 
     sleep 2
-    if  kill -0 $sclang  2> /dev/null 
-        then
+    count=0
+    while  kill -0 $sclang  2> /dev/null 
+        do
+            if [[ $count -gt $dur ]] && [ -f /etc/rpi-issue ]
+                then # give it 90 tries
+                    sudo reboot -r now
+            fi
+            echo "kill everything"
+            kill -9 $sclang
+            if ( [[ $server -ne 0  ]] && kill -0 $server  2> /dev/null )
+                then
+                    kill -9 $server
+            fi
+            sleep 0
             killall jackd
-    fi
+            sleep 0
+            kill $sclang
+            sleep 1
+            count=$(( $count + 1 ))
+    done
