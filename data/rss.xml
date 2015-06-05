@@ -4,7 +4,7 @@
  <title>Tweets</title>
  <item>
   <title>5</title>
-  <decription>play{f=LocalIn.ar(2).tanh;k=Latch.kr(f[0].abs,Impulse.kr(1/4));LocalOut.ar(f+CombC.ar(Blip.ar([4,6],100*k+50,0.9),1,k*0.3,50*f));f}//44.1kHz</decription>
+  <description>play{f=LocalIn.ar(2).tanh;k=Latch.kr(f[0].abs,Impulse.kr(1/4));LocalOut.ar(f+CombC.ar(Blip.ar([4,6],100*k+50,0.9),1,k*0.3,50*f));f}//44.1kHz</description>
   <guid>5</guid>
   <pubDate>2009-10-1 01:01:01</pubDate>
   <author>earslap</author>
@@ -1263,6 +1263,42 @@ play{Out.ar([0,1],LPF.ar(Saw.ar(SinOsc.kr(XLine.kr(9,5000,9),0,20,99),0.7,0),500
   <guid>591561854129954816</guid>
   <pubDate>2015-04-24 11:18:31</pubDate>
   <author>celesteh</author>
+ </item>
+ <item>
+  <title>605747893589426176</title>
+  <description>play{b=SinOsc;c=LFNoise0;d=AllpassC;e=0.2;d.ar(d.ar(b.ar(c.kr(2).range(220,440),c.kr,e),e*10,b.kr(e).range(e,e*9),10))}!3</description>
+  <guid>605747893589426176</guid>
+  <pubDate>2015-06-02 14:48:46</pubDate>
+  <author>mirtov</author>
+ </item>
+ <item>
+  <title>606083117133230080</title>
+  <description>fork{6.do{Pbind(\dur,0.125,\sustain,1.2.rand,\strum,2.rand/4,\degree,Pn(Plazy({Pshuf({9.rand}!4,4).clump(4.rand+1)}))).play;4.wait}}//#sc140</description>
+  <guid>606083117133230080</guid>
+  <pubDate>2015-06-03 13:00:50</pubDate>
+  <author>coreyker</author>
+ </item>
+ <item>
+  <title>606079851183927296</title>
+  <description>play{d=Demand;i=Impulse;Decay.ar(t=i.ar(8))*Saw.ar(2**(d.ar(t,0,Drand(d.ar(i.ar(1),0,Dseq([0,9,5]!6+[12,5,0],inf)),inf))/12)*120!2)}//#sc140</description>
+  <guid>606079851183927296</guid>
+  <pubDate>2015-06-03 12:47:51</pubDate>
+  <author>coreyker</author>
+ </item>
+ <item>
+  <title>605869476525965312</title>
+  <description>{Integrator.ar(LFSaw.ar(5),LFSaw.ar(2086),Line.ar(48,86))}.play #sc140</description>
+  <guid>605869476525965312</guid>
+  <pubDate>2015-06-02 22:51:54</pubDate>
+  <author>CourtSociety</author>
+ </item>
+ <item>
+  <title>605767231864061956</title>
+  <description>Help me I cant read it!!!!! I only know {SinOsc.ar(440, 0, 0.5)}.play; 
+… (w/ chadikin at Archipelbuurt) [pic] — https://t.co/8vvE20QBMo</description>
+  <guid>605767231864061956</guid>
+  <pubDate>2015-06-02 16:05:37</pubDate>
+  <author>patrickHartono</author>
  </item>
 </channel>
 </rss>
